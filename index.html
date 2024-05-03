@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="az">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="title" content="" />
+
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/general.css" />
+    <link rel="stylesheet" href="./assets/css/home.css" />
+
+    <title>Homepage</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <nav class="navbar flex align-items-center justify-content-between">
+          <a href="./index.html" class="navbar__logo">
+            <img src="./assets/images/logo.png" alt="logo" />
+          </a>
+          <ul class="navbar__menu flex align-items-center">
+            <li>
+              <a aria-label="Haqqımızda" title="Haqqımızda" href="./about.html">
+                Haqqımızda
+              </a>
+              <ul class="dropdown">
+                <li>
+                  <a href="" aria-label="Haqqımızda" title="Haqqımızda"
+                    >Televiziya</a
+                  >
+                </li>
+                <li><a href="" aria-label="Radio" title="Radio">Radio</a></li>
+              </ul>
+            </li>
+            <li>
+              <a
+                aria-label="Price list"
+                title="Price list"
+                href="./price-list.html"
+              >
+                Price list
+              </a>
+            </li>
+            <li>
+              <a
+                aria-label="Sponsorluq"
+                title="Sponsorluq"
+                href="./sponsorship.html"
+              >
+                Sponsorluq
+              </a>
+            </li>
+            <li><a aria-label="Əlaqə" title="Əlaqə" href="">Əlaqə</a></li>
+            <li>
+              <select name="" id="lang">
+                <option value="AZ" data-url="">AZ</option>
+                <option value="EN" data-url="">EN</option>
+                <option value="RU" data-url="">RU</option>
+              </select>
+            </li>
+          </ul>
+          <button type="button" class="navbar__hamburger">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="33"
+              height="25"
+              viewBox="0 0 33 25"
+              fill="none"
+            >
+              <path
+                d="M0 25V20.8333H33V25H0ZM0 14.5833V10.4167H33V14.5833H0ZM0 4.16667V0H33V4.16667H0Z"
+                fill="#6D6E71"
+              />
+            </svg>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="response">
+        <h1>Sorğunu doldur</h1>
+        <div class="response__form">
+          <form action="" class="form" id="form">
+            <input type="text" name="product" id="">
+            <input type="text" name="company" id="">
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="copyrights">
+        Veb-sayt
+        <a href="" aria-label="copyrights" title="Copyrights">coder.az</a>
+        tərəfindən hazırlanıb
+      </div>
+    </footer>
+
+    <script src="./assets/js/general.js"></script>
+    <script src="./assets/js/home.js"></script>
+  </body>
+</html>

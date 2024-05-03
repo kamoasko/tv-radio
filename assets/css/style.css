@@ -1,0 +1,145 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  /* 10/16*100%=62.5% --> 1rem=10px */
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+@font-face {
+  font-family: "Bahnschrift";
+  src: local("Bahnschrift"),
+    url(../fonts/bahnschrift/BAHNSCHRIFT.TTF) format("truetype"),
+    url(../fonts/bahnschrift/BAHNSCHRIFT\ 1.TTF) format("truetype"),
+    url(../fonts/bahnschrift/BAHNSCHRIFT\ 2.TTF) format("truetype"),
+    url(../fonts/bahnschrift/BAHNSCHRIFT\ 3.TTF) format("truetype"),
+    url(../fonts/bahnschrift/BAHNSCHRIFT\ 4.TTF) format("truetype"),
+    url(../fonts/bahnschrift/BAHNSCHRIFT\ 5.TTF) format("truetype"),
+    url(../fonts/bahnschrift/BAHNSCHRIFT\ 6.TTF) format("truetype"),
+    url(../fonts/bahnschrift/BAHNSCHRIFT\ 7.TTF) format("truetype"),
+    url(../fonts/bahnschrift/BAHNSCHRIFT\ 8.TTF) format("truetype"),
+    url(../fonts/bahnschrift/BAHNSCHRIFT\ 9.TTF) format("truetype"),
+    url(../fonts/bahnschrift/BAHNSCHRIFT\ 10.TTF) format("truetype"),
+    url(../fonts/bahnschrift/BAHNSCHRIFT\ 11.TTF) format("truetype"),
+    url(../fonts/bahnschrift/BAHNSCHRIFT\ 12.TTF) format("truetype"),
+    url(../fonts/bahnschrift/BAHNSCHRIFT\ 13.TTF) format("truetype"),
+    url(../fonts/bahnschrift/BAHNSCHRIFT\ 14.TTF) format("truetype"),
+    url(../fonts/Forum-Regular.otf) format("opentype");
+  font-weight: 700;
+}
+
+:root {
+  --color-main: #9747ff;
+  --color-bg: #00a2f7;
+  --color-white: #ffffff;
+  --color-linear-blue: linear-gradient(174deg, #9747ff 4.73%, #5b2b99 145.75%);
+  --color-black: #000000;
+  --color-light-black: #6d6e71;
+  --color-dark: #1d1d1b;
+
+  --container-width-lg: 126.2rem;
+
+  --main-font: "Bahnschrift", sans-serif, serif;
+}
+
+body {
+  font-family: var(--main-font);
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 2.2rem;
+  letter-spacing: 0.16px;
+
+  background-color: var(--color-white);
+  color: var(--color-light-black);
+}
+
+h1 {
+  font-size: clamp(2em, 10vw, 4.8rem);
+  font-weight: 700;
+  line-height: 25.576px; /* 53.283% */
+  color: var(--color-dark);
+}
+
+h2 {
+  font-size: clamp(3.6rem, 5vw, 6.4rem);
+  font-weight: 400;
+  line-height: 110%;
+}
+
+h3 {
+  font-weight: 400;
+  font-size: clamp(3.2rem, 5vw, 4.8rem);
+  line-height: 93%;
+  letter-spacing: -1.786px;
+}
+
+h4 {
+  font-size: 2.4rem;
+  font-weight: 400;
+  line-height: 2.8rem; /* 116.667% */
+  letter-spacing: -1.071px;
+}
+
+.container {
+  max-width: var(--container-width-lg);
+  width: 90%;
+  margin: 0 auto;
+}
+
+img,
+picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* @media (max-width: 1200px) {
+  .container {
+    padding: 0 2rem;
+  }
+} */
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 4.8rem;
+  }
+
+  /* h2 {
+    font-size: 2.1rem;
+  }
+
+  h3 {
+    font-size: 2.4rem;
+    line-height: 2.8rem;
+  }
+
+  h4 {
+    font-size: 1.6rem;
+  } */
+}
