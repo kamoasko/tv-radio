@@ -1,0 +1,38 @@
+.response {
+  margin-top: 12.8rem;
+  padding: 8.3rem 2rem;
+}
+
+.response > h1 {
+  text-align: center;
+}
+
+.response__form {
+  margin-top: 7.2rem;
+}
+
+.form {
+  column-gap: 1.1rem;
+  justify-content: space-between;
+}
+
+.response__form-field,
+.form > select {
+  padding: 1.7rem 3rem;
+  border-radius: 3.4rem;
+  border: 0.5px solid var(--color-darker);
+  flex-basis: 19.2rem;
+}
+
+.response__form-field > input,
+.form > select {
+  font-size: 2rem;
+  font-family: var(--main-font);
+  font-weight: 400;
+  color: var(--color-light-black);
+}
+
+.response__form-field > input::placeholder {
+  display: flex;
+  text-align: center;
+}

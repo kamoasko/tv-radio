@@ -44,7 +44,7 @@ closeHamburger.addEventListener("click", closeNavMenu);
 
 // default language change
 // Iterate over each select element
-$("select").each(function () {
+$("#lang").each(function () {
   // Cache the number of options
   var $this = $(this),
     numberOfOptions = $(this).children("option").length;
