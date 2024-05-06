@@ -42,14 +42,50 @@
   font-size: 2.4rem;
 }
 
+.navbar__menu > li {
+  position: relative;
+  cursor: pointer;
+}
+
 .navbar__menu > li > a:hover,
 .navbar__menu > li > a:active {
   color: var(--color-main);
 }
 
+/* dropdown */
+
 .dropdown {
-  display: none;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 40%);
+  row-gap: 1rem;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
+
+.navbar__menu > li:hover > .dropdown {
+  visibility: visible;
+  opacity: 1;
+}
+
+.dropdown > li > a {
+  /* width: 17.1rem; */
+  height: 3.1rem;
+  border-radius: 1.8rem;
+  border: 0.1rem solid var(--color-darker);
+  padding: 1rem 3rem;
+  font-size: 1.6rem;
+}
+
+.dropdown > li > a:hover,
+.dropdown > li > a:active {
+  background-color: var(--color-main);
+  color: var(--color-white);
+}
+
+/* language */
 
 #lang {
   color: var(--color-light-black);
@@ -57,6 +93,78 @@
   font-size: 2rem;
 }
 
+/* custom select option start */
+
+.s-hidden {
+  visibility: hidden;
+  padding-right: 10px;
+}
+
+.select {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  color: var(--color-light-black);
+  font-family: var(--main-font);
+  font-size: 2rem;
+}
+
+.styledSelect {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: transparent;
+  padding: 0 10px;
+  font-weight: bold;
+}
+
+.styledSelect:after {
+  content: "";
+  width: 0;
+  height: 0;
+  border: 0.5rem solid transparent;
+  border-color: black transparent transparent transparent;
+  position: absolute;
+  top: 0.9rem;
+  right: 0.6rem;
+}
+
+.options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  z-index: 999;
+  list-style: none;
+}
+
+.options li {
+  margin-top: 1rem;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  height: 3.1rem;
+  border-radius: 1.8rem;
+  border: 0.1rem solid var(--color-darker);
+  padding: 1rem 3rem;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.options li:hover {
+  background-color: var(--color-main);
+  color: var(--color-white);
+}
+
+/* custom select-option ended */
+
+.mob_lang,
+.close_menu,
 .navbar__hamburger {
   display: none;
 }
@@ -83,8 +191,122 @@
 }
 
 @media only screen and (max-width: 767px) {
+  .header {
+    position: relative;
+  }
+
   .navbar__menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+    position: absolute;
+    top: -100vh;
+    left: 0;
+    width: 100%;
+    height: max-content;
+    padding: calc(100vh / 8) 0;
+    background-color: var(--color-navmob-bg);
+    color: var(--color-white);
+    font-size: 2rem;
+    transition: top 0.4s ease;
+  }
+
+  .navbar__menu.active {
+    top: 0;
+  }
+
+  .navbar__menu > li {
+    width: 100%;
+    padding: 1.5rem;
+    border-top: 0.1rem solid var(--color-white);
+    text-align: center;
+    height: 5.3rem;
+    transition: height 0.3s ease;
+  }
+
+  .navbar__menu > li.opened {
+    height: 13rem;
+  }
+
+  .navbar__menu > li > a:hover,
+  .navbar__menu > li > a:active {
+    color: inherit;
+  }
+
+  .dropdown {
+    margin-top: 1.4rem;
+    position: static;
+    transform: unset;
+    row-gap: 1.9rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .navbar__menu > li:hover > .dropdown {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .navbar__menu > li.opened > .dropdown {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .dropdown > li > a {
+    height: auto;
+    border-radius: unset;
+    border: unset;
+    padding: unset;
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+
+  .dropdown > li > a:hover,
+  .dropdown > li > a:active {
+    background-color: unset;
+    color: initial;
+  }
+
+  .lang {
     display: none;
+  }
+
+  .mob_lang {
+    display: block;
+  }
+
+  .mobile__lang {
+    column-gap: 3.1rem;
+    justify-content: center;
+    margin-top: 3rem;
+  }
+
+  .lang_option {
+    position: relative;
+    cursor: pointer;
+  }
+
+  .lang_option.active::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: -12%;
+    height: 0.3rem;
+    width: 123%;
+    border-radius: 0.6rem;
+    border-bottom: 0.3rem solid var(--color-main);
+    transition: 0.3s ease;
+  }
+
+  li.close_menu {
+    display: block;
+    position: absolute;
+    top: 2.1rem;
+    right: 1.7rem;
+    width: auto;
+    border-top: 0;
   }
 
   .navbar__hamburger {

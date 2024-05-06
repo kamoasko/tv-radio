@@ -40,11 +40,13 @@ html {
 :root {
   --color-main: #9747ff;
   --color-bg: #00a2f7;
+  --color-navmob-bg: #39f;
   --color-white: #ffffff;
   --color-linear-blue: linear-gradient(174deg, #9747ff 4.73%, #5b2b99 145.75%);
   --color-black: #000000;
   --color-light-black: #6d6e71;
   --color-dark: #1d1d1b;
+  --color-darker: #3f3939;
 
   --container-width-lg: 126.2rem;
 

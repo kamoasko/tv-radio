@@ -25,40 +25,111 @@
               <a aria-label="Haqqımızda" title="Haqqımızda" href="./about.html">
                 Haqqımızda
               </a>
-              <ul class="dropdown">
+            </li>
+            <li>
+              <a aria-label="Price list" title="Price list"> Price list </a>
+              <ul class="dropdown flex flex-direct-col">
                 <li>
-                  <a href="" aria-label="Haqqımızda" title="Haqqımızda"
+                  <a
+                    class="flex-center"
+                    href="./price-list.html"
+                    aria-label="Televiziya"
+                    title="Televiziya"
                     >Televiziya</a
                   >
                 </li>
-                <li><a href="" aria-label="Radio" title="Radio">Radio</a></li>
+                <li>
+                  <a
+                    class="flex-center"
+                    href=""
+                    aria-label="Radio"
+                    title="Radio"
+                    >Radio</a
+                  >
+                </li>
               </ul>
             </li>
             <li>
-              <a
-                aria-label="Price list"
-                title="Price list"
-                href="./price-list.html"
-              >
-                Price list
-              </a>
+              <a aria-label="Sponsorluq" title="Sponsorluq"> Sponsorluq </a>
+              <ul class="dropdown flex flex-direct-col">
+                <li>
+                  <a
+                    class="flex-center"
+                    href="./sponsorship.html"
+                    aria-label="Televiziya"
+                    title="Televiziya"
+                    >Televiziya</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="flex-center"
+                    href=""
+                    aria-label="Radio"
+                    title="Radio"
+                    >Radio</a
+                  >
+                </li>
+              </ul>
             </li>
             <li>
-              <a
-                aria-label="Sponsorluq"
-                title="Sponsorluq"
-                href="./sponsorship.html"
-              >
-                Sponsorluq
-              </a>
+              <a aria-label="Əlaqə" title="Əlaqə">Əlaqə</a>
+              <ul class="dropdown flex flex-direct-col">
+                <li>
+                  <a
+                    class="flex-center"
+                    href="mailto:tvreklam@gmai.com"
+                    aria-label="tvreklam@gmai.com"
+                    title="tvreklam@gmai.com"
+                    >tvreklam@gmai.com</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="flex-center"
+                    href="tel:0705576564"
+                    aria-label="Radio"
+                    title="Radio"
+                    >0705576564</a
+                  >
+                </li>
+              </ul>
             </li>
-            <li><a aria-label="Əlaqə" title="Əlaqə" href="">Əlaqə</a></li>
-            <li>
-              <select name="" id="lang">
-                <option value="AZ" data-url="">AZ</option>
-                <option value="EN" data-url="">EN</option>
-                <option value="RU" data-url="">RU</option>
+            <li class="lang">
+              <select name="lang" id="lang">
+                <option value="AZ" data-url="https://www.google.com/">
+                  AZ
+                </option>
+                <option value="EN" data-url="https://ceylanur.coder.az/">
+                  EN
+                </option>
+                <option value="RU" data-url="https://ceylanur.coder.az/ru">
+                  RU
+                </option>
               </select>
+            </li>
+            <li class="mob_lang">
+              <div class="mobile__lang flex align-items-center">
+                <div class="lang_option active" data-url="https://ceylanur.coder.az/">AZ</div>
+                <div class="lang_option" data-url="https://ceylanur.coder.az/en">EN</div>
+                <div class="lang_option" data-url="https://ceylanur.coder.az/ru">RU</div>
+              </div>
+            </li>
+            <li class="close_menu">
+              <button type="button">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="17"
+                  height="17"
+                  viewBox="0 0 17 17"
+                  fill="none"
+                >
+                  <path
+                    d="M1.7 17L0 15.3L6.8 8.5L0 1.7L1.7 0L8.5 6.8L15.3 0L17 1.7L10.2 8.5L17 15.3L15.3 17L8.5 10.2L1.7 17Z"
+                    fill="white"
+                  />
+                </svg>
+              </button>
             </li>
           </ul>
           <button type="button" class="navbar__hamburger">
@@ -84,8 +155,8 @@
         <h1>Sorğunu doldur</h1>
         <div class="response__form">
           <form action="" class="form" id="form">
-            <input type="text" name="product" id="">
-            <input type="text" name="company" id="">
+            <input type="text" name="product" id="" />
+            <input type="text" name="company" id="" />
           </form>
         </div>
       </section>
@@ -99,6 +170,10 @@
       </div>
     </footer>
 
+    <!-- jQuery libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- custom js -->
     <script src="./assets/js/general.js"></script>
     <script src="./assets/js/home.js"></script>
   </body>
