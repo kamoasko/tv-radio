@@ -1,6 +1,6 @@
 .response {
   margin-top: 12.8rem;
-  padding: 8.3rem 2rem;
+  padding: 8.3rem 1.5rem;
 }
 
 .response > h1 {
@@ -8,25 +8,32 @@
 }
 
 .response__form {
-  margin-top: 7.2rem;
+  margin-top: 8.2rem;
 }
 
 .form {
-  column-gap: 1.1rem;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(192px, 1fr));
+  gap: 2.5rem 1.1rem;
 }
 
-.response__form-field,
-.form > select {
-  padding: 1.7rem 3rem;
+.response__form-field {
+  padding: 1.7rem 2rem;
   border-radius: 3.4rem;
   border: 0.5px solid var(--color-darker);
-  flex-basis: 19.2rem;
+  width: 100%;
+  font-size: clamp(1.6rem, 4vw, 2rem);
+  background-color: var(--color-white);
 }
 
-.response__form-field > input,
-.form > select {
-  font-size: 2rem;
+.rff {
+  cursor: pointer;
+  position: relative;
+}
+
+.response__form-field > input {
+  width: 100%;
+  font-size: clamp(1.6rem, 4vw, 2rem);
   font-family: var(--main-font);
   font-weight: 400;
   color: var(--color-light-black);
@@ -35,4 +42,77 @@
 .response__form-field > input::placeholder {
   display: flex;
   text-align: center;
+}
+
+.selected {
+  width: 100%;
+  column-gap: 1.4rem;
+}
+
+.response__form-options {
+  visibility: hidden;
+  opacity: 0;
+  height: 0;
+  position: absolute;
+  top: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  row-gap: 0.9rem;
+  z-index: 80;
+}
+
+.response__form-options > div {
+  height: 3.8rem;
+  width: 11.6rem;
+  overflow: hidden;
+  border-radius: 18px;
+  font-size: 1.6rem;
+  border: 0.1rem solid var(--color-darker);
+  background-color: var(--color-white);
+}
+
+.rfo > div {
+  width: 15rem;
+}
+
+.response__form-options > div:hover,
+.rfo > div:hover > label,
+.response__form-options > div:active,
+.rfo > div:active > label,
+.response__form-options > div.selected > label,
+.rfo > div.selected {
+  background-color: var(--color-main);
+  color: var(--color-white);
+}
+
+.response__form-options > div > label {
+  width: 100%;
+  height: 100%;
+  padding: 1rem 2rem;
+  background-color: var(--color-white);
+  cursor: pointer;
+}
+
+.rff.active > .response__form-options {
+  visibility: visible;
+  opacity: 1;
+  transition: 0.4s ease;
+  height: auto;
+}
+
+@media only screen and (max-width: 1439px) {
+  .response__form-field {
+    grid-column: span 2;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .response {
+    margin-top: 4rem;
+    padding: 2.9rem 2rem;
+  }
+
+  .response__form {
+    margin-top: 4.2rem;
+  }
 }
