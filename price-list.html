@@ -14,7 +14,185 @@
     <title>Price list</title>
   </head>
   <body>
+    <header class="header">
+      <div class="container">
+        <nav class="navbar flex align-items-center justify-content-between">
+          <a href="./index.html" class="navbar__logo">
+            <img src="./assets/images/logo.png" alt="logo" />
+          </a>
+          <ul class="navbar__menu flex align-items-center">
+            <li>
+              <a aria-label="Haqqımızda" title="Haqqımızda" href="./about.html">
+                Haqqımızda
+              </a>
+            </li>
+            <li>
+              <a aria-label="Price list" title="Price list"> Price list </a>
+              <ul class="dropdown flex flex-direct-col">
+                <li>
+                  <a
+                    class="flex-center"
+                    href="./price-list.html"
+                    aria-label="Televiziya"
+                    title="Televiziya"
+                    >Televiziya</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="flex-center"
+                    href=""
+                    aria-label="Radio"
+                    title="Radio"
+                    >Radio</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a aria-label="Sponsorluq" title="Sponsorluq"> Sponsorluq </a>
+              <ul class="dropdown flex flex-direct-col">
+                <li>
+                  <a
+                    class="flex-center"
+                    href="./sponsorship.html"
+                    aria-label="Televiziya"
+                    title="Televiziya"
+                    >Televiziya</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="flex-center"
+                    href=""
+                    aria-label="Radio"
+                    title="Radio"
+                    >Radio</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a aria-label="Əlaqə" title="Əlaqə">Əlaqə</a>
+              <ul class="dropdown flex flex-direct-col">
+                <li>
+                  <a
+                    class="flex-center"
+                    href="mailto:tvreklam@gmai.com"
+                    aria-label="tvreklam@gmai.com"
+                    title="tvreklam@gmai.com"
+                    >tvreklam@gmai.com</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="flex-center"
+                    href="tel:0705576564"
+                    aria-label="Radio"
+                    title="Radio"
+                    >0705576564</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="lang">
+              <select name="lang" id="lang">
+                <option value="AZ" data-url="https://www.google.com/">
+                  AZ
+                </option>
+                <option value="EN" data-url="https://ceylanur.coder.az/">
+                  EN
+                </option>
+                <option value="RU" data-url="https://ceylanur.coder.az/ru">
+                  RU
+                </option>
+              </select>
+            </li>
+            <li class="mob_lang">
+              <div class="mobile__lang flex align-items-center">
+                <div
+                  class="lang_option active"
+                  data-url="https://ceylanur.coder.az/"
+                >
+                  AZ
+                </div>
+                <div
+                  class="lang_option"
+                  data-url="https://ceylanur.coder.az/en"
+                >
+                  EN
+                </div>
+                <div
+                  class="lang_option"
+                  data-url="https://ceylanur.coder.az/ru"
+                >
+                  RU
+                </div>
+              </div>
+            </li>
+            <li class="close_menu">
+              <button type="button">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="17"
+                  height="17"
+                  viewBox="0 0 17 17"
+                  fill="none"
+                >
+                  <path
+                    d="M1.7 17L0 15.3L6.8 8.5L0 1.7L1.7 0L8.5 6.8L15.3 0L17 1.7L10.2 8.5L17 15.3L15.3 17L8.5 10.2L1.7 17Z"
+                    fill="white"
+                  />
+                </svg>
+              </button>
+            </li>
+          </ul>
+          <button type="button" class="navbar__hamburger">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="33"
+              height="25"
+              viewBox="0 0 33 25"
+              fill="none"
+            >
+              <path
+                d="M0 25V20.8333H33V25H0ZM0 14.5833V10.4167H33V14.5833H0ZM0 4.16667V0H33V4.16667H0Z"
+                fill="#6D6E71"
+              />
+            </svg>
+          </button>
+        </nav>
+      </div>
+    </header>
 
+    <main>
+      <section class="channels">
+        <div class="container">
+          <div class="channels__grid">
+            <article class="channels__card">
+              <a class="flex-center" href="">
+                <picture>
+                  <img src="./assets/images/Azərbaycan_Televiziya_logo.png" alt="">
+                </picture>
+              </a>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="copyrights">
+        Veb-sayt
+        <a href="" aria-label="copyrights" title="Copyrights">coder.az</a>
+        tərəfindən hazırlanıb
+      </div>
+    </footer>
+
+    <!-- jQuery libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- custom js -->
     <script src="./assets/js/general.js"></script>
     <script src="./assets/js/home.js"></script>
   </body>

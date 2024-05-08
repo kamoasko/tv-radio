@@ -1,0 +1,10 @@
+.channels__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
+    gap: 8.2rem 7.5rem;
+}
+
+.channels__card > a > picture {
+    border-radius: 50%;
+    border: 0.1rem dotted var(--color-dark);
+}
