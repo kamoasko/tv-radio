@@ -165,3 +165,14 @@ responseSelects.forEach((select) => {
     }
   });
 });
+
+// send response
+
+const formBtn = document.getElementById("form_btn");
+const backdrop = document.querySelector(".backdrop");
+
+function sendResponse() {
+  formBtn.addEventListener("click", () => {
+    backdrop.classList.add("opened");
+  });
+}

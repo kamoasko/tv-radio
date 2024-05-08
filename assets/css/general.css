@@ -35,6 +35,7 @@
   left: 0;
   width: 100%;
   background-color: var(--color-white);
+  z-index: 89;
 }
 
 .navbar__logo {
@@ -172,6 +173,92 @@
 .close_menu,
 .navbar__hamburger {
   display: none;
+}
+
+/* backdrop */
+
+.backdrop {
+  display: none;
+  place-content: center;
+  grid-auto-columns: minmax(27.5rem, 44rem);
+  background-color: rgba(82, 82, 122, 0.4);
+  padding: 0 2rem;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+}
+
+.backdrop.opened {
+  display: grid;
+}
+
+.modal {
+  max-width: 44rem;
+  border-radius: 0.7rem;
+  background-color: var(--color-navmob-bg);
+  padding: 5.6rem 5.4rem 4.4rem;
+  position: relative;
+}
+
+.modal__title {
+  text-align: center;
+  color: var(--color-white);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 600;
+  line-height: 25.576px; /* 79.925% */
+}
+
+.modal__form {
+  margin-top: 3.4rem;
+  width: 100%;
+}
+
+.modal__form-inputs {
+  row-gap: 2.4rem;
+}
+
+.modal__form-input {
+  width: 100%;
+  height: 4.3rem;
+}
+
+.modal__form-input > input {
+  width: 100%;
+  height: 100%;
+  font-size: 1.6rem;
+  font-family: var(--main-font);
+  padding: 1.2rem 0.85rem;
+  border-radius: 0.6rem;
+  background-color: var(--color-white);
+}
+
+.modal__form-btn {
+  height: 4.8rem;
+  width: 100%;
+  padding: 1.2rem 0.85rem;
+  color: var(--color-white);
+  font-size: clamp(1.6rem, 4vw, 2rem);
+  font-family: var(--main-font);
+  background: var(--color-linear-blue);
+  margin-top: 7.6rem;
+  border-radius: 1rem;
+  border: 0.1rem solid var(--color-main);
+}
+
+.modal__form-btn:hover, .modal__form-btn:active {
+  background: var(--color-white);
+  color: var(--color-main);
+}
+
+.modal__close {
+  position: absolute;
+  top: 2rem;
+  right: 1rem;
 }
 
 .footer {
@@ -316,5 +403,19 @@
 
   .navbar__hamburger {
     display: block;
+  }
+
+  .modal__form-btn {
+    margin-top: 6rem;
+  }
+
+  .footer {
+    margin-top: 10.4rem;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .footer {
+    margin-top: 9.3rem;
   }
 }

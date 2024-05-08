@@ -11,7 +11,7 @@
   margin-top: 8.2rem;
 }
 
-.form {
+.form > div:first-child {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(192px, 1fr));
   gap: 2.5rem 1.1rem;
@@ -100,6 +100,49 @@
   height: auto;
 }
 
+.response__form-buttons {
+  margin-top: 5.3rem;
+}
+
+.btn {
+  border-radius: 4.1rem;
+  border: 0.1rem solid var(--color-main);
+  height: 5.4rem;
+  font-size: clamp(1.6rem, 4vw, 2rem);
+  color: var(--color-main);
+  font-family: var(--main-font);
+  padding: 1.4rem 2.9rem;
+}
+
+.btn1 {
+  background: var(--color-linear-blue);
+  color: var(--color-white);
+  overflow: hidden;
+  width: 15.4rem;
+}
+
+.btn:hover,
+.btn:active {
+  background-color: var(--color-main);
+  color: var(--color-white);
+  transition: 0.3s ease all;
+}
+
+.btn:hover > svg > path,
+.btn:active > svg > path {
+  fill: var(--color-white);
+}
+
+.btn1:hover,
+.btn1:active {
+  background: var(--color-white);
+  color: transparent;
+  background-image: var(--color-linear-blue);
+  background-clip: text;
+  -moz-background-clip: text;
+  -webkit-background-clip: text;
+}
+
 @media only screen and (max-width: 1439px) {
   .response__form-field {
     grid-column: span 2;
@@ -114,5 +157,26 @@
 
   .response__form {
     margin-top: 4.2rem;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .response {
+    margin-top: 4rem;
+    padding: 2rem;
+  }
+
+  .response__form {
+    margin-top: 2.8rem;
+  }
+
+  .response__form-buttons {
+    flex-direction: column;
+    row-gap: 1.2rem;
+    margin-top: 3.8rem;
+  }
+
+  .btn {
+    width: 100%;
   }
 }
