@@ -149,12 +149,14 @@
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1200px) {
   .response {
     margin-top: 4rem;
     padding: 2.9rem 2rem;
   }
+}
 
+@media only screen and (max-width: 768px) {
   .response__form {
     margin-top: 4.2rem;
   }

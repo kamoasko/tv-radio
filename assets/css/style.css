@@ -35,6 +35,7 @@ html {
     url(../fonts/bahnschrift/BAHNSCHRIFT\ 14.TTF) format("truetype"),
     url(../fonts/Forum-Regular.otf) format("opentype");
   font-weight: 700;
+  font-weight: 400;
 }
 
 :root {

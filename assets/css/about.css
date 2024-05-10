@@ -1,0 +1,141 @@
+.about {
+  margin: 4rem 0 6rem;
+  padding: 1.8rem 0;
+}
+
+.about__wrapper {
+  width: 100%;
+  gap: 7rem 5.1rem;
+}
+
+.about__wrapper > * {
+  flex: 1;
+}
+
+.about__detail > h1 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 4rem;
+  font-weight: 400;
+}
+
+.about__detail-content {
+  margin-top: 4.9rem;
+  color: var(--color-black);
+  font-family: "Bahnschrift", sans-serif, serif;
+  font-weight: 400;
+}
+
+.about__img {
+  position: relative;
+}
+
+.about__img > picture {
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.gradient {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 0.5rem;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+@media only screen and (max-width: 1200px) {
+  .about__wrapper {
+    flex-direction: column;
+    position: relative;
+    gap: 0;
+  }
+
+  .about__detail > h1 {
+    position: absolute;
+    top: 16%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    color: var(--color-white);
+  }
+
+  .about__img {
+    order: -1;
+    flex: unset;
+    width: 100%;
+  }
+
+  .about__img > picture {
+    height: 22.3rem;
+  }
+
+  .about__img > picture > img {
+    object-position: 0 -18rem;
+  }
+
+  .gradient {
+    display: block;
+    background-position: 0 -18rem !important;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .about__img > picture > img {
+    object-position: 0 -14rem;
+  }
+
+  .gradient {
+    background-position: 0 -14rem !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .about__img > picture > img {
+    object-position: 0 -7rem;
+    transform: scale(1.1);
+  }
+
+  .gradient {
+    background-position: 0 -7rem !important;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .about {
+    margin-bottom: 0;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .about__img > picture {
+    height: 10.5rem;
+  }
+
+  .about__img > picture > img {
+    object-position: 0 -4rem;
+  }
+
+  .about__detail > h1 {
+    line-height: 2.2rem;
+    top: 6%;
+  }
+
+  .gradient {
+    background-position: 0 -4rem !important;
+  }
+}
+
+@media only screen and (max-width: 433px) {
+  .about__detail > h1 {
+    top: 4%;
+  }
+}
+
+@media only screen and (max-width: 433px) {
+  .about__detail > h1 {
+    top: 2%;
+  }
+}

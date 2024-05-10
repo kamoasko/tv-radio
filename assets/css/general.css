@@ -368,7 +368,7 @@
   .dropdown > li > a:hover,
   .dropdown > li > a:active {
     background-color: unset;
-    color: initial;
+    color: var(--color-white);
   }
 
   .lang {
@@ -427,5 +427,12 @@
 @media only screen and (max-width: 767px) {
   .footer {
     margin-top: 9.3rem;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .breadcrumb > div > svg {
+    width: 1.6rem;
+    height: 1.3rem;
   }
 }
