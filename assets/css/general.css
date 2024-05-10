@@ -26,6 +26,15 @@
   flex-direction: column;
 }
 
+/* breadcrumb */
+
+.breadcrumb {
+  margin-top: 3.7rem;
+  column-gap: 1.4rem;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  color: var(--color-black);
+}
+
 /* header */
 
 .header {
@@ -250,7 +259,8 @@
   border: 0.1rem solid var(--color-main);
 }
 
-.modal__form-btn:hover, .modal__form-btn:active {
+.modal__form-btn:hover,
+.modal__form-btn:active {
   background: var(--color-white);
   color: var(--color-main);
 }
