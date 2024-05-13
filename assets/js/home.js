@@ -24,15 +24,18 @@ const responseSelects = document.querySelectorAll(".rff");
 
 responseSelects.forEach((select) => {
   select.addEventListener("click", (e) => {
-    // Close any previously opened options
-    responseSelects.forEach((s) => {
-      if (s !== e.currentTarget && s.classList.contains("active")) {
-        s.classList.remove("active");
-      }
-    });
+    // Check if the clicked element is an input field
+    if (!e.target.matches("input")) {
+      // Close any previously opened options
+      responseSelects.forEach((s) => {
+        if (s !== e.currentTarget && s.classList.contains("active")) {
+          s.classList.remove("active");
+        }
+      });
 
-    // Toggle the "active" class for the clicked option
-    e.currentTarget.classList.toggle("active");
+      // Toggle the "active" class for the clicked option
+      e.currentTarget.classList.toggle("active");
+    }
   });
 
   const options = select.querySelector(".response__form-options");
@@ -48,9 +51,9 @@ responseSelects.forEach((select) => {
 
 // create new response
 
-const addBtn = document.querySelector(".add_btn");
+const createBtn = document.querySelector(".add_btn");
 const resForm = document.querySelector(
-  ".response__form > form>div:first-child"
+  ".response__form > form > div:first-child"
 );
 
 function createNewForm() {
@@ -71,196 +74,197 @@ function createNewForm() {
 </button>
 
   <div class="rff_new">
-    <div class="response__form-field">
-      <input type="text" name="product" id="" placeholder="Şirkət" />
-    </div>
-    <div class="response__form-field">
-      <input type="text" name="product" id="" placeholder="Məhsul" />
-    </div>
+  <div class="response__form-field inp">
+  <input
+    data-title="Şirkıtin adı ümumi"
+    type="text"
+    name="company"
+    id=""
+    placeholder="Şirkət"
+  />
+</div>
+<div class="response__form-field">
+  <input type="text" name="product" id="" placeholder="Məhsul" />
+</div>
 
-    <div class="response__form-field rff" name="" id="">
-      <div class="selected flex-center" value="Reklam növü">
-        <span>Reklam növü</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="14"
-          height="10"
-          viewBox="0 0 14 10"
-          fill="none"
-        >
-          <path
-            d="M1.5 1L6.9176 8.88014C6.95733 8.93794 7.04267 8.93794 7.0824 8.88014L12.5 1"
-            stroke="#5D5858"
-            stroke-width="2"
-            stroke-linecap="round"
-          />
-        </svg>
-      </div>
-      <div class="response__form-options flex flex-direct-col">
-        <div class="flex-center" value="Reklam növü">ATV</div>
-        <div class="flex-center" value="Reklam növü">ARB</div>
-        <div class="flex-center" value="Reklam növü">ARB 24</div>
-        <div class="flex-center" value="Reklam növü">XƏZƏR TV</div>
-        <div class="flex-center" value="Reklam növü">İCTİMAİ</div>
-      </div>
-    </div>
-
-    <div class="response__form-field rff" name="" id="">
-      <div class="selected flex-center" value="Reklam növü">
-        <span>Kanalar</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="14"
-          height="10"
-          viewBox="0 0 14 10"
-          fill="none"
-        >
-          <path
-            d="M1.5 1L6.9176 8.88014C6.95733 8.93794 7.04267 8.93794 7.0824 8.88014L12.5 1"
-            stroke="#5D5858"
-            stroke-width="2"
-            stroke-linecap="round"
-          />
-        </svg>
-      </div>
-      <div class="response__form-options flex flex-direct-col rfo">
-        <div class="flex-center" value="Reklam növü">
-          <label
-            class="flex align-items-center justify-content-between"
-            for="ch1"
-          >
-            <input type="checkbox" name="adstype" id="ch1" />AZTV
-          </label>
-        </div>
-        <div class="flex-center" value="Reklam növü">
-          <label
-            class="flex align-items-center justify-content-between"
-            for="ch2"
-          >
-            <input type="checkbox" name="adstype" id="ch2" />AZTV
-          </label>
-        </div>
-        <div class="flex-center" value="Reklam növü">
-          <label
-            class="flex align-items-center justify-content-between"
-            for="ch3"
-          >
-            <input type="checkbox" name="adstype" id="ch3" />AZTV
-          </label>
-        </div>
-        <div class="flex-center" value="Reklam növü">
-          <label
-            class="flex align-items-center justify-content-between"
-            for="ch4"
-          >
-            <input type="checkbox" name="adstype" id="ch4" />AZTV
-          </label>
-        </div>
-        <div class="flex-center" value="Reklam növü">
-          <label
-            class="flex align-items-center justify-content-between"
-            for="ch5"
-          >
-            <input type="checkbox" name="adstype" id="ch5" />AZTV
-          </label>
-        </div>
-        <div class="flex-center" value="Reklam növü">
-          <label
-            class="flex align-items-center justify-content-between"
-            for="adstype"
-          >
-            <input type="checkbox" name="adstype" id="adstype" />AZTV
-          </label>
-        </div>
-      </div>
-    </div>
-
-    <div class="response__form-field rff" name="" id="">
-      <div class="selected flex-center">
-        <span>Xronometraj</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="14"
-          height="10"
-          viewBox="0 0 14 10"
-          fill="none"
-        >
-          <path
-            d="M1.5 1L6.9176 8.88014C6.95733 8.93794 7.04267 8.93794 7.0824 8.88014L12.5 1"
-            stroke="#5D5858"
-            stroke-width="2"
-            stroke-linecap="round"
-          />
-        </svg>
-      </div>
-      <div class="response__form-options rfo flex flex-direct-col">
-        <div class="flex-center" value="Reklam növü">
-          <label
-            class="flex align-items-center justify-content-between"
-            for="1"
-          >
-            <input type="checkbox" name="timing" id="1" />10 saniyə
-          </label>
-        </div>
-        <div class="flex-center" value="Reklam növü">
-          <label
-            class="flex align-items-center justify-content-between"
-            for="2"
-          >
-            <input type="checkbox" name="timing" id="2" />15 saniyə
-          </label>
-        </div>
-        <div class="flex-center" value="Reklam növü">
-          <label
-            class="flex align-items-center justify-content-between"
-            for="3"
-          >
-            <input type="checkbox" name="timing" id="3" />20 saniyə
-          </label>
-        </div>
-        <div class="flex-center" value="Reklam növü">
-          <label
-            class="flex align-items-center justify-content-between"
-            for="4"
-          >
-            <input type="checkbox" name="timing" id="4" />30 saniyə
-          </label>
-        </div>
-      </div>
-    </div>
-
-    <div class="response__form-field rff" name="" id="">
-      <div class="selected flex-center" value="Reklam növü">
-        <span>Period</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="14"
-          height="10"
-          viewBox="0 0 14 10"
-          fill="none"
-        >
-          <path
-            d="M1.5 1L6.9176 8.88014C6.95733 8.93794 7.04267 8.93794 7.0824 8.88014L12.5 1"
-            stroke="#5D5858"
-            stroke-width="2"
-            stroke-linecap="round"
-          />
-        </svg>
-      </div>
-      <div class="response__form-options flex flex-direct-col">
-        <div class="flex-center" value="Reklam növü">Reklam növü</div>
-        <div class="flex-center" value="Reklam növü">Reklam növü</div>
-      </div>
-    </div>
-
-    <div class="response__form-field">
-      <input
-        type="text"
-        name="product"
-        id=""
-        placeholder="Büdcə(AZN)"
+<div class="response__form-field rff" name="" id="">
+  <div class="selected flex-center" value="Reklam növü">
+    <span>Reklam növü</span>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="14"
+      height="10"
+      viewBox="0 0 14 10"
+      fill="none"
+    >
+      <path
+        d="M1.5 1L6.9176 8.88014C6.95733 8.93794 7.04267 8.93794 7.0824 8.88014L12.5 1"
+        stroke="#5D5858"
+        stroke-width="2"
+        stroke-linecap="round"
       />
+    </svg>
+  </div>
+  <div class="response__form-options flex flex-direct-col">
+    <div class="flex-center" value="Reklam növü">TV Spot</div>
+    <div class="flex-center" value="Reklam növü">Radio Spot</div>
+    <div class="flex-center" value="Reklam növü">TV Bant</div>
+  </div>
+</div>
+
+<div class="response__form-field rff" name="" id="">
+  <div class="selected flex-center" value="Reklam növü">
+    <span>Kanalar</span>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="14"
+      height="10"
+      viewBox="0 0 14 10"
+      fill="none"
+    >
+      <path
+        d="M1.5 1L6.9176 8.88014C6.95733 8.93794 7.04267 8.93794 7.0824 8.88014L12.5 1"
+        stroke="#5D5858"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+    </svg>
+  </div>
+  <div class="response__form-options flex flex-direct-col rfo">
+    <div class="flex-center" value="Reklam növü">
+      <label
+        class="flex align-items-center justify-content-between"
+        for="ch1"
+      >
+        <input type="checkbox" name="adstype" id="ch1" data-id="" />AZTV
+      </label>
     </div>
+    <div class="flex-center" value="Reklam növü">
+      <label
+        class="flex align-items-center justify-content-between"
+        for="ch2"
+      >
+        <input type="checkbox" name="adstype" id="ch2"  data-id=""/>ARB
+      </label>
+    </div>
+    <div class="flex-center" value="Reklam növü">
+      <label
+        class="flex align-items-center justify-content-between"
+        for="ch3"
+      >
+        <input type="checkbox" name="adstype" id="ch3" data-id="" />ARB 24
+      </label>
+    </div>
+    <div class="flex-center" value="Reklam növü">
+      <label
+        class="flex align-items-center justify-content-between"
+        for="ch4"
+      >
+        <input type="checkbox" name="adstype" id="ch4" data-id=""/>ICTIMAI TV
+      </label>
+    </div>
+    <div class="flex-center" value="Reklam növü">
+      <label
+        class="flex align-items-center justify-content-between"
+        for="ch5"
+      >
+        <input type="checkbox" name="adstype" id="ch5" data-id="" />Space TV
+      </label>
+    </div>
+    <div class="flex-center" value="Reklam növü">
+      <label
+        class="flex align-items-center justify-content-between"
+        for="ch6"
+      >
+        <input type="checkbox" name="adstype" id="ch6" data-id=""/>IDMAN TV
+      </label>
+    </div>
+  </div>
+</div>
+
+<div class="response__form-field rff" name="" id="">
+  <div class="selected flex-center">
+    <span>Xronometraj</span>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="14"
+      height="10"
+      viewBox="0 0 14 10"
+      fill="none"
+    >
+      <path
+        d="M1.5 1L6.9176 8.88014C6.95733 8.93794 7.04267 8.93794 7.0824 8.88014L12.5 1"
+        stroke="#5D5858"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+    </svg>
+  </div>
+  <div class="response__form-options rfo flex flex-direct-col">
+    <div class="flex-center" value="Reklam növü">
+      <label
+        class="flex align-items-center justify-content-between"
+        for="1"
+      >
+        <input type="checkbox" name="timing" id="1" data-id="" />10 saniyə
+      </label>
+    </div>
+    <div class="flex-center" value="Reklam növü">
+      <label
+        class="flex align-items-center justify-content-between"
+        for="2"
+      >
+        <input type="checkbox" name="timing" id="2" data-id="" />15 saniyə
+      </label>
+    </div>
+    <div class="flex-center" value="Reklam növü">
+      <label
+        class="flex align-items-center justify-content-between"
+        for="3"
+      >
+        <input type="checkbox" name="timing" id="3" data-id="" />20 saniyə
+      </label>
+    </div>
+    <div class="flex-center" value="Reklam növü">
+      <label
+        class="flex align-items-center justify-content-between"
+        for="4"
+      >
+        <input type="checkbox" name="timing" id="4" data-id="" />30 saniyə
+      </label>
+    </div>
+    <div class="flex-center rfo1" value="Reklam növü">
+      <label
+        class="flex align-items-center justify-content-between"
+        for=""
+      >
+        <span>Digər&ThickSpace;</span>
+        <span>|</span>
+        <input
+          type="number"
+          name="timing"
+          id=""
+          data-id=""
+          placeholder="saniyə"
+        />
+      </label>
+    </div>
+  </div>
+</div>
+
+<div class="response__form-field flex align-items-center" name="" id="">
+<input type="date" name="" id="myInp" placeholder="Period" value="">
+<input type="date" name="" id="myInp" placeholder="Period" value="">
+</div>
+
+<div class="response__form-field">
+<input
+  type="text"
+  name="badge"
+  id=""
+  placeholder="Büdcə(AZN)"
+/>
+</div>
   </div>
     `;
 
@@ -272,15 +276,18 @@ function createNewForm() {
   // Loop through each new .rff element and add event listeners
   newResponseSelects.forEach((select) => {
     select.addEventListener("click", (e) => {
-      // Close any previously opened options
-      newResponseSelects.forEach((s) => {
-        if (s !== e.currentTarget && s.classList.contains("active")) {
-          s.classList.remove("active");
-        }
-      });
+      // Check if the clicked element is an input field
+      if (!e.target.matches("input")) {
+        // Close any previously opened options
+        newResponseSelects.forEach((s) => {
+          if (s !== e.currentTarget && s.classList.contains("active")) {
+            s.classList.remove("active");
+          }
+        });
 
-      // Toggle the "active" class for the clicked option
-      e.currentTarget.classList.toggle("active");
+        // Toggle the "active" class for the clicked option
+        e.currentTarget.classList.toggle("active");
+      }
     });
 
     const options = select.querySelector(".response__form-options");
@@ -300,6 +307,38 @@ function createNewForm() {
     removeBtn.nextElementSibling.remove();
     removeBtn.remove();
   });
+
+  getFlatCalendar();
 }
 
-addBtn.addEventListener("click", createNewForm);
+createBtn.addEventListener("click", createNewForm);
+
+// calendar functionality
+
+function getFlatCalendar() {
+  const config = {
+    enableTime: false,
+    dateFormat: "m-d-Y",
+    disableMobile: "true",
+    onChange: function (selectedDates, dateStr, instance) {
+      console.log(selectedDates);
+    },
+    onOpen: [
+      function (selectedDates, dateStr, instance) {
+        //...
+      },
+      function (selectedDates, dateStr, instance) {
+        //...
+      },
+    ],
+    onClose: function (selectedDates, dateStr, instance) {
+      // ...
+    },
+  };
+
+  flatpickr("#myInp", config);
+}
+
+getFlatCalendar();
+
+window.addEventListener("resize", getFlatCalendar);

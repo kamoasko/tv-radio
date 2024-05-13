@@ -1,6 +1,10 @@
+.footer_main {
+  margin-top: 10rem !important;
+}
+
 .response {
   margin-top: 12.8rem;
-  padding: 8.3rem 1.5rem;
+  padding: 8.3rem 1.5rem 15rem;
 }
 
 .response > h1 {
@@ -95,7 +99,7 @@
   left: 50%;
   transform: translateX(-50%);
   row-gap: 0.9rem;
-  z-index: 80;
+  z-index: 100;
 }
 
 .response__form-options > div {
@@ -122,6 +126,12 @@
   color: var(--color-white);
 }
 
+.response__form-options > div.rfo1:hover,
+.rfo > div.rfo1:hover > label {
+  background-color: var(--color-white);
+  color: var(--color-light-black);
+}
+
 .response__form-options > div > label {
   width: 100%;
   height: 100%;
@@ -130,11 +140,26 @@
   cursor: pointer;
 }
 
+.response__form-options > div > label > span:nth-child(2) {
+  margin-right: 2rem;
+  font-size: 1.3rem;
+}
+
+.response__form-options > div > label > input[type="number"] {
+  height: 3.8rem;
+  font-family: var(--main-font);
+}
+
 .rff.active > .response__form-options {
   visibility: visible;
   opacity: 1;
   transition: 0.4s ease;
   height: auto;
+}
+
+#myInp {
+  height: 100%;
+  font-size: 1.3rem;
 }
 
 .response__form-buttons {
@@ -183,6 +208,13 @@
 @media only screen and (max-width: 1439px) {
   .response__form-field {
     grid-column: span 2;
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  .response {
+    margin-top: 10rem;
+    padding: 4.1rem 1.5rem;
   }
 }
 

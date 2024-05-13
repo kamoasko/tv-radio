@@ -35,6 +35,13 @@
 
     <link rel="manifest" href="./assets/images/favicon/site.webmanifest" />
 
+    <!-- Flatpickr CSS link -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="./assets/css/style.css" />
     <link rel="stylesheet" href="./assets/css/general.css" />
     <link rel="stylesheet" href="./assets/css/home.css" />
@@ -196,11 +203,19 @@
     <main>
       <section class="response">
         <h1>Sorğunu doldur</h1>
+
+        <!-- Response Form -->
         <div class="response__form">
           <form action="" class="form justify-content-between" id="form">
             <div>
               <div class="response__form-field inp">
-                <input data-title="Şirkıtin adı ümumi" type="text" name="product" id="" placeholder="Şirkət" />
+                <input
+                  data-title="Şirkıtin adı ümumi"
+                  type="text"
+                  name="company"
+                  id=""
+                  placeholder="Şirkət"
+                />
               </div>
               <div class="response__form-field">
                 <input type="text" name="product" id="" placeholder="Məhsul" />
@@ -225,11 +240,9 @@
                   </svg>
                 </div>
                 <div class="response__form-options flex flex-direct-col">
-                  <div class="flex-center" value="Reklam növü">ATV</div>
-                  <div class="flex-center" value="Reklam növü">ARB</div>
-                  <div class="flex-center" value="Reklam növü">ARB 24</div>
-                  <div class="flex-center" value="Reklam növü">XƏZƏR TV</div>
-                  <div class="flex-center" value="Reklam növü">İCTİMAİ</div>
+                  <div class="flex-center" value="Reklam növü">TV Spot</div>
+                  <div class="flex-center" value="Reklam növü">Radio Spot</div>
+                  <div class="flex-center" value="Reklam növü">TV Bant</div>
                 </div>
               </div>
 
@@ -257,7 +270,7 @@
                       class="flex align-items-center justify-content-between"
                       for="ch1"
                     >
-                      <input type="checkbox" name="adstype" id="ch1" />AZTV
+                      <input type="checkbox" name="adstype" id="ch1" data-id="" />AZTV
                     </label>
                   </div>
                   <div class="flex-center" value="Reklam növü">
@@ -265,7 +278,7 @@
                       class="flex align-items-center justify-content-between"
                       for="ch2"
                     >
-                      <input type="checkbox" name="adstype" id="ch2" />AZTV
+                      <input type="checkbox" name="adstype" id="ch2"  data-id=""/>ARB
                     </label>
                   </div>
                   <div class="flex-center" value="Reklam növü">
@@ -273,7 +286,7 @@
                       class="flex align-items-center justify-content-between"
                       for="ch3"
                     >
-                      <input type="checkbox" name="adstype" id="ch3" />AZTV
+                      <input type="checkbox" name="adstype" id="ch3" data-id="" />ARB 24
                     </label>
                   </div>
                   <div class="flex-center" value="Reklam növü">
@@ -281,7 +294,7 @@
                       class="flex align-items-center justify-content-between"
                       for="ch4"
                     >
-                      <input type="checkbox" name="adstype" id="ch4" />AZTV
+                      <input type="checkbox" name="adstype" id="ch4" data-id=""/>ICTIMAI TV
                     </label>
                   </div>
                   <div class="flex-center" value="Reklam növü">
@@ -289,15 +302,15 @@
                       class="flex align-items-center justify-content-between"
                       for="ch5"
                     >
-                      <input type="checkbox" name="adstype" id="ch5" />AZTV
+                      <input type="checkbox" name="adstype" id="ch5" data-id="" />Space TV
                     </label>
                   </div>
                   <div class="flex-center" value="Reklam növü">
                     <label
                       class="flex align-items-center justify-content-between"
-                      for="adstype"
+                      for="ch6"
                     >
-                      <input type="checkbox" name="adstype" id="adstype" />AZTV
+                      <input type="checkbox" name="adstype" id="ch6" data-id=""/>IDMAN TV
                     </label>
                   </div>
                 </div>
@@ -327,7 +340,7 @@
                       class="flex align-items-center justify-content-between"
                       for="1"
                     >
-                      <input type="checkbox" name="timing" id="1" />10 saniyə
+                      <input type="checkbox" name="timing" id="1" data-id="" />10 saniyə
                     </label>
                   </div>
                   <div class="flex-center" value="Reklam növü">
@@ -335,7 +348,7 @@
                       class="flex align-items-center justify-content-between"
                       for="2"
                     >
-                      <input type="checkbox" name="timing" id="2" />15 saniyə
+                      <input type="checkbox" name="timing" id="2" data-id="" />15 saniyə
                     </label>
                   </div>
                   <div class="flex-center" value="Reklam növü">
@@ -343,7 +356,7 @@
                       class="flex align-items-center justify-content-between"
                       for="3"
                     >
-                      <input type="checkbox" name="timing" id="3" />20 saniyə
+                      <input type="checkbox" name="timing" id="3" data-id="" />20 saniyə
                     </label>
                   </div>
                   <div class="flex-center" value="Reklam növü">
@@ -351,40 +364,37 @@
                       class="flex align-items-center justify-content-between"
                       for="4"
                     >
-                      <input type="checkbox" name="timing" id="4" />30 saniyə
+                      <input type="checkbox" name="timing" id="4" data-id="" />30 saniyə
+                    </label>
+                  </div>
+                  <div class="flex-center rfo1" value="Reklam növü">
+                    <label
+                      class="flex align-items-center justify-content-between"
+                      for=""
+                    >
+                      <span>Digər&ThickSpace;</span>
+                      <span>|</span>
+                      <input
+                        type="number"
+                        name="timing"
+                        id=""
+                        data-id=""
+                        placeholder="saniyə"
+                      />
                     </label>
                   </div>
                 </div>
               </div>
 
-              <div class="response__form-field rff" name="" id="">
-                <div class="selected flex-center" value="Reklam növü">
-                  <span>Period</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="10"
-                    viewBox="0 0 14 10"
-                    fill="none"
-                  >
-                    <path
-                      d="M1.5 1L6.9176 8.88014C6.95733 8.93794 7.04267 8.93794 7.0824 8.88014L12.5 1"
-                      stroke="#5D5858"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                  </svg>
-                </div>
-                <div class="response__form-options flex flex-direct-col">
-                  <div class="flex-center" value="Reklam növü">Reklam növü</div>
-                  <div class="flex-center" value="Reklam növü">Reklam növü</div>
-                </div>
+              <div class="response__form-field flex align-items-center" name="" id="">
+                <input type="date" name="" id="myInp" placeholder="Period" value="">
+                <input type="date" name="" id="myInp" placeholder="Period" value="">
               </div>
 
               <div class="response__form-field">
                 <input
                   type="text"
-                  name="product"
+                  name="badge"
                   id=""
                   placeholder="Büdcə(AZN)"
                 />
@@ -413,6 +423,8 @@
             </div>
           </form>
         </div>
+
+        <!-- Backdrop and Modal -->
         <div class="backdrop">
           <div class="modal">
             <div class="modal__title">Formu doldur</div>
@@ -454,7 +466,7 @@
       </section>
     </main>
 
-    <footer class="footer">
+    <footer class="footer footer_main">
       <div class="copyrights">
         Veb-sayt
         <a href="" aria-label="copyrights" title="Copyrights">coder.az</a>
@@ -464,6 +476,9 @@
 
     <!-- jQuery libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <!-- custom js -->
     <script src="./assets/js/general.js"></script>
