@@ -318,7 +318,7 @@ createBtn.addEventListener("click", createNewForm);
 function getFlatCalendar() {
   const config = {
     enableTime: false,
-    dateFormat: "m-d-Y",
+    dateFormat: "d-m-Y",
     disableMobile: "true",
     onChange: function (selectedDates, dateStr, instance) {
       console.log(selectedDates);
@@ -340,5 +340,3 @@ function getFlatCalendar() {
 }
 
 getFlatCalendar();
-
-window.addEventListener("resize", getFlatCalendar);
