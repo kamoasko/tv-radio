@@ -55,6 +55,7 @@ const createBtn = document.querySelector(".add_btn");
 const resForm = document.querySelector(
   ".response__form > form > div:first-child"
 );
+const footer = document.querySelector("footer");
 
 function createNewForm() {
   let newForm = `
@@ -268,6 +269,7 @@ function createNewForm() {
   </div>
     `;
 
+  footer.classList.add("footer_main");
   resForm.insertAdjacentHTML("afterend", newForm);
 
   // Get all newly created .rff elements
@@ -306,6 +308,7 @@ function createNewForm() {
   removeBtn.addEventListener("click", () => {
     removeBtn.nextElementSibling.remove();
     removeBtn.remove();
+    footer.classList.remove("footer_main");
   });
 
   getFlatCalendar();
