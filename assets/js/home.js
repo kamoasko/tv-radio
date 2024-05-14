@@ -322,11 +322,13 @@ function getFlatCalendar() {
   const config = {
     enableTime: false,
     dateFormat: "d-m-Y",
-    mode: "multiple",
-
+    mode: "range",
+    minDate: "today",
     disableMobile: "true",
     onChange: function (selectedDates, dateStr, instance) {
       console.log(selectedDates);
+      console.log(dateStr);
+      console.log(instance.now);
     },
     onOpen: [
       function (selectedDates, dateStr, instance) {
@@ -345,3 +347,14 @@ function getFlatCalendar() {
 }
 
 getFlatCalendar();
+
+// form submit
+
+const form = document.querySelector("form")
+const inputs = document.querySelectorAll("input")
+
+// form.addEventListener("submit", ()=>{
+//   inputs.forEach(input => {
+//     alert(input.value)
+//   })
+// })
