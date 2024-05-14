@@ -322,6 +322,8 @@ function getFlatCalendar() {
   const config = {
     enableTime: false,
     dateFormat: "d-m-Y",
+    mode: "multiple",
+
     disableMobile: "true",
     onChange: function (selectedDates, dateStr, instance) {
       console.log(selectedDates);

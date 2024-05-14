@@ -55,6 +55,26 @@
   display: block;
 }
 
+.response__form-field > input::-webkit-input-placeholder {
+  display: flex;
+  text-align: center;
+}
+
+.response__form-field > input::-moz-placeholder {
+  display: flex;
+  text-align: center;
+}
+
+.response__form-field > input:-ms-input-placeholder {
+  display: flex;
+  text-align: center;
+}
+
+.response__form-field > input::-ms-input-placeholder {
+  display: flex;
+  text-align: center;
+}
+
 .response__form-field > input::placeholder {
   display: flex;
   text-align: center;
@@ -87,6 +107,7 @@
 
 .selected {
   width: 100%;
+  -moz-column-gap: 1.4rem;
   column-gap: 1.4rem;
 }
 
@@ -159,7 +180,8 @@
 
 #myInp {
   height: 100%;
-  font-size: 1.3rem;
+  /* font-size: 1.3rem; */
+  text-align: center;
 }
 
 .response__form-buttons {
