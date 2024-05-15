@@ -326,6 +326,8 @@ function getFlatCalendar() {
     minDate: "today",
     disableMobile: "true",
     onChange: function (selectedDates, dateStr, instance) {
+      document.getElementById("myInp").style.fontSize = "1.33rem";
+
       console.log(selectedDates);
       console.log(dateStr);
       console.log(instance.now);
@@ -350,8 +352,8 @@ getFlatCalendar();
 
 // form submit
 
-const form = document.querySelector("form")
-const inputs = document.querySelectorAll("input")
+const form = document.querySelector("form");
+const inputs = document.querySelectorAll("input");
 
 // form.addEventListener("submit", ()=>{
 //   inputs.forEach(input => {

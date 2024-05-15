@@ -75,13 +75,17 @@
 
 .dropdown {
   position: absolute;
-  top: 0;
+  top: 165%;
   left: 50%;
-  transform: translate(-50%, 40%);
+  transform: translateX(-50%);
   row-gap: 1rem;
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.3s ease, visibility 0.3s ease;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
 }
 
 .navbar__menu > li:hover > .dropdown {
