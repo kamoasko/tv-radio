@@ -360,3 +360,17 @@ const inputs = document.querySelectorAll("input");
 //     alert(input.value)
 //   })
 // })
+
+fetch("https://tvradio.coder.az/api/ads")
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return response.json();
+  })
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((error) => {
+    console.error("There was a problem fetching the data:", error);
+  });
