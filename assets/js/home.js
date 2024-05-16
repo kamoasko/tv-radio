@@ -253,10 +253,15 @@ function createNewForm() {
   </div>
 </div>
 
-<div class="response__form-field flex align-items-center" name="" id="">
-<input type="date" name="" id="myInp" placeholder="Period" value="">
-<input type="date" name="" id="myInp" placeholder="Period" value="">
-</div>
+ <div class="response__form-field" name="" id="">
+                <input
+                  type="date"
+                  name=""
+                  id="myInp"
+                  placeholder="Period"
+                  value=""
+                />
+  </div>
 
 <div class="response__form-field">
 <input
