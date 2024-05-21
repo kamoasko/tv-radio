@@ -1,4 +1,7 @@
 /* custom classes */
+.disable {
+  opacity: 0.5;
+}
 
 .flex {
   display: flex;
@@ -227,7 +230,8 @@
   color: var(--color-white);
   font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 600;
-  line-height: 25.576px; /* 79.925% */
+  line-height: 25.576px;
+  /* 79.925% */
 }
 
 .modal__form {
