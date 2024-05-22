@@ -44,12 +44,12 @@ closeHamburger.addEventListener("click", closeNavMenu);
 
 // default language change
 // Iterate over each select element
-$("#lang").each(function () {
+$(document).ready(function () {
   // Cache the number of options
-  var $this = $(this),
-    numberOfOptions = $(this).children("option").length;
+  var $this = $("#lang"),
+    numberOfOptions = $this.children("option").length;
 
-  let allOptions = $(this).children("option");
+  let allOptions = $this.children("option");
   let dataUrls = []; // To store the URLs
 
   allOptions.each(function () {
@@ -69,8 +69,14 @@ $("#lang").each(function () {
   // Cache the styled div
   var $styledSelect = $this.next("div.styledSelect");
 
-  // Show the first select option in the styled div
-  $styledSelect.text($this.children("option").eq(0).text());
+  // Function to set the styled select text based on the select element value
+  function setStyledSelectText() {
+    let selectedOption = $this.children("option:selected").text();
+    $styledSelect.text(selectedOption);
+  }
+
+  // Set the initial styled select text
+  setStyledSelectText();
 
   // Insert an unordered list after the styled div and also cache the list
   var $list = $("<ul />", {
@@ -106,9 +112,13 @@ $("#lang").each(function () {
   // Updates the select element to have the value of the equivalent option
   $listItems.click(function (e) {
     e.stopPropagation();
-    $styledSelect.text($(this).text()).removeClass("active");
+    var selectedText = $(this).text();
+    $styledSelect.text(selectedText).removeClass("active");
     $this.val($(this).attr("rel"));
     $list.hide();
+
+    // Save the selected value to localStorage
+    localStorage.setItem("selectedLang", $this.val());
 
     var selectedUrl = $(this).data("url");
     if (selectedUrl) {
@@ -122,6 +132,13 @@ $("#lang").each(function () {
     $styledSelect.removeClass("active");
     $list.hide();
   });
+
+  // On page load, check localStorage for a saved value
+  var savedLang = localStorage.getItem("selectedLang");
+  if (savedLang) {
+    $this.val(savedLang);
+    setStyledSelectText(); // Update the styled select text to the saved value
+  }
 });
 
 // mobile labguage change
