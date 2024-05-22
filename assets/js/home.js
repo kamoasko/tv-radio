@@ -27,9 +27,12 @@ function getFormValues() {
     const channels = [...form.querySelectorAll("#channels input:checked")]?.map(
       (checkbox) => checkbox.value
     );
-    const timing = [...form.querySelectorAll("#timing input:checked")]?.map(
-      (checkbox) => checkbox.value
-    );
+    const otherTiming =
+      form.querySelector('.rfo input[name="timing"]')?.value || null;
+    const timing = [
+      ...form.querySelectorAll("#timing input:checked"),
+      otherTiming,
+    ]?.map((checkbox) => checkbox.value);
     const period = form.querySelector('input[name="period"]')?.value;
     const budget = form.querySelector('input[name="badge"]')?.value;
 
@@ -133,6 +136,7 @@ function renderTiming(datas, container) {
 // Fetch data from API
 document.addEventListener("DOMContentLoaded", () => {
   const apiUrl = `https://tvradio.coder.az/${htmlLang}/api`;
+  console.log(apiUrl);
   const adsTypeOptions = document.getElementById("adTypeOptions");
   const channels = document.getElementById("channels");
   const timing = document.getElementById("timing");
@@ -183,22 +187,37 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   function createNewForm() {
-    let newForm = `
+    async function getTranslates() {
+      const res = await fetch(
+        `https://tvradio.coder.az/api/translates?lang=${htmlLang}`
+      );
+      const data = await res.json();
+
+      const company = data.company;
+      const product = data.product;
+      const adType = data.ad_type;
+      const channels = data.channels;
+      const badge = data.badge;
+      const period = data.period;
+      const timing = data.timing;
+
+      console.log(data);
+      let newForm = `
             <button type="button" class="remove_btn flex">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                     <path d="M1.6 16L0 14.4L6.4 8L0 1.6L1.6 0L8 6.4L14.4 0L16 1.6L9.6 8L16 14.4L14.4 16L8 9.6L1.6 16Z" fill="#5B5757"/>
                 </svg>
             </button>
-            <div class="rff_new">
+            <div class="form_data rff_new">
                 <div class="response__form-field inp">
-                    <input data-title="Şirkıtin adı ümumi" type="text" name="company" placeholder="Şirkət" />
+                    <input data-title="Şirkıtin adı ümumi" type="text" name="company" placeholder="${company}" />
                 </div>
                 <div class="response__form-field">
-                    <input type="text" name="product" placeholder="Məhsul" />
+                    <input type="text" name="product" placeholder="${product}" />
                 </div>
                 <div class="response__form-field rff">
                     <div class="selected flex-center" value="Reklam növü">
-                        <span>Reklam növü</span>
+                        <span>${adType}</span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
                             <path d="M1.5 1L6.9176 8.88014C6.95733 8.93794 7.04267 8.93794 7.0824 8.88014L12.5 1" stroke="#5D5858" stroke-width="2" stroke-linecap="round"/>
                         </svg>
@@ -206,8 +225,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="response__form-options flex flex-direct-col" id="adTypeOptions"></div>
                 </div>
                 <div class="response__form-field rff">
-                    <div class="selected flex-center" value="Reklam növü">
-                        <span>Kanalar</span>
+                    <div class="selected flex-center" value="${channels}">
+                        <span>${channels}</span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
                             <path d="M1.5 1L6.9176 8.88014C6.95733 8.93794 7.04267 8.93794 7.0824 8.88014L12.5 1" stroke="#5D5858" stroke-width="2" stroke-linecap="round"/>
                         </svg>
@@ -216,88 +235,91 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
                 <div class="response__form-field rff">
                     <div class="selected flex-center">
-                        <span>Xronometraj</span>
+                        <span>${timing}</span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
                             <path d="M1.5 1L6.9176 8.88014C6.95733 8.93794 7.04267 8.93794 7.0824 8.88014L12.5 1" stroke="#5D5858" stroke-width="2" stroke-linecap="round"/>
                         </svg>
                     </div>
                     <div class="response__form-options rfo flex flex-direct-col" id="timing">
-                        <div class="flex-center rfo1" value="Reklam növü">
+                        <div class="flex-center rfo1" value="${timing}">
                             <label class="flex align-items-center justify-content-between">
                                 <span>Digər&ThickSpace;</span>
                                 <span>|</span>
-                                <input type="number" name="timing" placeholder="saniyə" />
+                                <input type="number" name="${timing}" placeholder="${timing}" />
                             </label>
                         </div>
                     </div>
                 </div>
                 <div class="response__form-field">
-                    <input type="date" name="period" id="myInp" placeholder="Period" value="" />
+                    <input type="date" name="${period}" id="myInp" placeholder="${period}" value="" />
                 </div>
                 <div class="response__form-field">
-                    <input type="text" name="badge" placeholder="Büdcə" />
+                    <input type="text" name="badge" placeholder="${badge}(AZN)" />
                 </div>
             </div>
         `;
 
-    resForm.insertAdjacentHTML("afterend", newForm);
-    footer.classList.add("footer_main");
-    const newFormElement = resForm.parentElement.querySelector(".rff_new");
+      resForm.insertAdjacentHTML("afterend", newForm);
+      footer.classList.add("footer_main");
+      const newFormElement = resForm.parentElement.querySelector(".rff_new");
 
-    // Apply event listeners and fetch logic to the new form
-    const newAdTypeOptions = newFormElement.querySelector("#adTypeOptions");
-    const newChannels = newFormElement.querySelector("#channels");
-    const newTiming = newFormElement.querySelector("#timing");
-    fetchData("/ads", (datas) => renderAdsType(datas, newAdTypeOptions));
-    fetchData("/channels?type=4", (datas) =>
-      renderChannels(datas, newChannels)
-    );
-    fetchData("/times", (datas) => renderTiming(datas, newTiming));
+      // Apply event listeners and fetch logic to the new form
+      const newAdTypeOptions = newFormElement.querySelector("#adTypeOptions");
+      const newChannels = newFormElement.querySelector("#channels");
+      const newTiming = newFormElement.querySelector("#timing");
+      fetchData("/ads", (datas) => renderAdsType(datas, newAdTypeOptions));
+      fetchData("/channels?type=4", (datas) =>
+        renderChannels(datas, newChannels)
+      );
+      fetchData("/times", (datas) => renderTiming(datas, newTiming));
 
-    newAdTypeOptions.addEventListener("click", (e) => {
-      if (e.target.classList.contains("flex-center")) {
-        let adsTypeId = e.target.getAttribute("data-id");
-        newChannels.innerHTML = "";
-        fetchData(`/channels?type=${adsTypeId}`, (datas) =>
-          renderChannels(datas, newChannels)
-        );
-      }
-    });
-
-    // Event listener for new selects
-    const newResponseSelects = newFormElement.querySelectorAll(".rff");
-
-    newResponseSelects.forEach((select) => {
-      select.addEventListener("click", (e) => {
-        if (!e.target.matches("input")) {
-          newResponseSelects.forEach((s) => {
-            if (s !== e.currentTarget && s.classList.contains("active")) {
-              s.classList.remove("active");
-            }
-          });
-          e.currentTarget.classList.toggle("active");
-        }
-      });
-
-      const options = select.querySelector(".response__form-options");
-      const selectedOptionText = select.querySelector(".selected > span");
-
-      options.addEventListener("click", (e) => {
+      newAdTypeOptions.addEventListener("click", (e) => {
         if (e.target.classList.contains("flex-center")) {
-          const optionText = e.target.textContent.trim();
-          selectedOptionText.textContent = optionText;
+          let adsTypeId = e.target.getAttribute("data-id");
+          newChannels.innerHTML = "";
+          fetchData(`/channels?type=${adsTypeId}`, (datas) =>
+            renderChannels(datas, newChannels)
+          );
         }
       });
-    });
 
-    const removeBtn = document.querySelector(".remove_btn");
-    removeBtn.addEventListener("click", () => {
-      removeBtn.nextElementSibling.remove();
-      removeBtn.remove();
-      footer.classList.remove("footer_main");
-    });
+      // Event listener for new selects
+      const newResponseSelects = newFormElement.querySelectorAll(".rff");
 
-    getFlatCalendar();
+      newResponseSelects.forEach((select) => {
+        select.addEventListener("click", (e) => {
+          if (!e.target.matches("input")) {
+            newResponseSelects.forEach((s) => {
+              if (s !== e.currentTarget && s.classList.contains("active")) {
+                s.classList.remove("active");
+              }
+            });
+            e.currentTarget.classList.toggle("active");
+          }
+        });
+
+        const options = select.querySelector(".response__form-options");
+        const selectedOptionText = select.querySelector(".selected > span");
+
+        options.addEventListener("click", (e) => {
+          if (e.target.classList.contains("flex-center")) {
+            const optionText = e.target.textContent.trim();
+            selectedOptionText.textContent = optionText;
+          }
+        });
+      });
+
+      const removeBtn = document.querySelector(".remove_btn");
+      removeBtn.addEventListener("click", () => {
+        removeBtn.nextElementSibling.remove();
+        removeBtn.remove();
+        footer.classList.remove("footer_main");
+      });
+
+      getFlatCalendar();
+    }
+
+    getTranslates();
   }
 
   createBtn.addEventListener("click", createNewForm);
