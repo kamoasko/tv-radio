@@ -48,6 +48,8 @@ html {
   --color-light-black: #6d6e71;
   --color-dark: #1d1d1b;
   --color-darker: #3f3939;
+  --color-error: #e04141;
+  --color-green: #09b009;
 
   --container-width-lg: 126.2rem;
 
@@ -73,7 +75,7 @@ body {
 h1 {
   font-size: 4.8rem;
   font-weight: 700;
-  line-height: 25.576px; /* 53.283% */
+  /* line-height: 25.576px;  */
   color: var(--color-dark);
   line-height: 51px;
 }
