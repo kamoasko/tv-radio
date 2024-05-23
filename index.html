@@ -217,7 +217,7 @@
         <div class="response__form">
           <form action="" class="form justify-content-between" id="form">
             <div class="form_data">
-              <div class="response__form-field inp">
+              <label class="response__form-field inp">
                 <input
                   data-title="Şirkıtin adı ümumi"
                   type="text"
@@ -225,14 +225,17 @@
                   id=""
                   placeholder="Şirkət"
                 />
-              </div>
+                <span class="error-message"></span>
+              </label>
               <div class="response__form-field">
                 <input type="text" name="product" id="" placeholder="Məhsul" />
+                <span class="error-message"></span>
               </div>
 
               <div class="response__form-field rff" name="" id="">
-                <div class="selected flex-center" value="Reklam növü">
-                  <span>Reklam növü</span>
+                <span class="error-message"></span>
+                <div class="selected flex-center">
+                  <span>Reklamın tipi</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="14"
@@ -248,19 +251,13 @@
                     />
                   </svg>
                 </div>
-                <div
-                  class="response__form-options flex flex-direct-col"
-                  id="adTypeOptions"
-                >
-                  <div class="flex-center" value="Reklam növü">TV Spot</div>
-                  <div class="flex-center" value="Reklam növü">Radio Spot</div>
-                  <div class="flex-center" value="Reklam növü">TV Bant</div>
-                </div>
+                <div class="response__form-options flex flex-direct-col" id="adTypeOptions"></div>
               </div>
 
               <div class="response__form-field rff" name="" id="">
-                <div class="selected flex-center" value="Reklam növü">
-                  <span>Kanalar</span>
+               <span class="error-message"></span>
+                <div class="selected flex-center">
+                  <span>Kanal</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="14"
@@ -276,92 +273,11 @@
                     />
                   </svg>
                 </div>
-                <div
-                  class="response__form-options flex flex-direct-col rfo"
-                  id="channels"
-                >
-                  <div class="flex-center" value="Reklam növü">
-                    <label
-                      class="flex align-items-center justify-content-between"
-                      for="ch1"
-                    >
-                      <input
-                        type="checkbox"
-                        name="adstype"
-                        id="ch1"
-                        data-id=""
-                      />AZTV
-                    </label>
-                  </div>
-                  <div class="flex-center" value="Reklam növü">
-                    <label
-                      class="flex align-items-center justify-content-between"
-                      for="ch2"
-                    >
-                      <input
-                        type="checkbox"
-                        name="adstype"
-                        id="ch2"
-                        data-id=""
-                      />ARB
-                    </label>
-                  </div>
-                  <div class="flex-center" value="Reklam növü">
-                    <label
-                      class="flex align-items-center justify-content-between"
-                      for="ch3"
-                    >
-                      <input
-                        type="checkbox"
-                        name="adstype"
-                        id="ch3"
-                        data-id=""
-                      />ARB 24
-                    </label>
-                  </div>
-                  <div class="flex-center" value="Reklam növü">
-                    <label
-                      class="flex align-items-center justify-content-between"
-                      for="ch4"
-                    >
-                      <input
-                        type="checkbox"
-                        name="adstype"
-                        id="ch4"
-                        data-id=""
-                      />ICTIMAI TV
-                    </label>
-                  </div>
-                  <div class="flex-center" value="Reklam növü">
-                    <label
-                      class="flex align-items-center justify-content-between"
-                      for="ch5"
-                    >
-                      <input
-                        type="checkbox"
-                        name="adstype"
-                        id="ch5"
-                        data-id=""
-                      />Space TV
-                    </label>
-                  </div>
-                  <div class="flex-center" value="Reklam növü">
-                    <label
-                      class="flex align-items-center justify-content-between"
-                      for="ch6"
-                    >
-                      <input
-                        type="checkbox"
-                        name="adstype"
-                        id="ch6"
-                        data-id=""
-                      />IDMAN TV
-                    </label>
-                  </div>
-                </div>
+                <div class="response__form-options flex flex-direct-col rfo" id="channels"></div>
               </div>
 
               <div class="response__form-field rff" name="" id="">
+                <span class="error-message"></span>
                 <div class="selected flex-center">
                   <span>Xronometraj</span>
                   <svg
@@ -379,63 +295,8 @@
                     />
                   </svg>
                 </div>
-                <div
-                  class="response__form-options rfo flex flex-direct-col"
-                  id="timing"
-                >
-                  <div class="flex-center" value="Reklam növü">
-                    <label
-                      class="flex align-items-center justify-content-between"
-                      for="1"
-                    >
-                      <input
-                        type="checkbox"
-                        name="timing"
-                        id="1"
-                        data-id=""
-                      />10 saniyə
-                    </label>
-                  </div>
-                  <div class="flex-center" value="Reklam növü">
-                    <label
-                      class="flex align-items-center justify-content-between"
-                      for="2"
-                    >
-                      <input
-                        type="checkbox"
-                        name="timing"
-                        id="2"
-                        data-id=""
-                      />15 saniyə
-                    </label>
-                  </div>
-                  <div class="flex-center" value="Reklam növü">
-                    <label
-                      class="flex align-items-center justify-content-between"
-                      for="3"
-                    >
-                      <input
-                        type="checkbox"
-                        name="timing"
-                        id="3"
-                        data-id=""
-                      />20 saniyə
-                    </label>
-                  </div>
-                  <div class="flex-center" value="Reklam növü">
-                    <label
-                      class="flex align-items-center justify-content-between"
-                      for="4"
-                    >
-                      <input
-                        type="checkbox"
-                        name="timing"
-                        id="4"
-                        data-id=""
-                      />30 saniyə
-                    </label>
-                  </div>
-                  <div class="flex-center rfo1" value="Reklam növü">
+                <div class="response__form-options rfo flex flex-direct-col" id="timing">
+                  <div class="flex-center rfo1">
                     <label
                       class="flex align-items-center justify-content-between"
                       for=""
@@ -444,24 +305,30 @@
                       <span>|</span>
                       <input
                         type="number"
-                        name="timing"
+                        name="otherTiming"
                         id=""
                         data-id=""
                         placeholder="saniyə"
+                        value=""
                       />
                     </label>
                   </div>
                 </div>
-              </div>
+               </div>
 
-              <div class="response__form-field" name="" id="">
+              <div
+                class="response__form-field"
+                name=""
+                id=""
+              >
                 <input
                   type="date"
-                  name=""
+                  name="period"
                   id="myInp"
-                  placeholder="Period"
+                  placeholder="Müddət"
                   value=""
                 />
+                <span class="error-message"></span>
               </div>
 
               <div class="response__form-field">
@@ -471,6 +338,7 @@
                   id=""
                   placeholder="Büdcə(AZN)"
                 />
+                <span class="error-message"></span>
               </div>
             </div>
 
@@ -494,48 +362,55 @@
               </button>
               <button class="btn btn1 flex-center" id="form_btn">Göndər</button>
             </div>
-          </form>
-        </div>
-
-        <!-- Backdrop and Modal -->
-        <div class="backdrop">
-          <div class="modal">
-            <div class="modal__title">Formu doldur</div>
-            <form action="" class="modal__form">
-              <div class="modal__form-inputs flex flex-direct-col">
-                <div class="modal__form-input">
+            <!-- Backdrop and Modal -->
+           <div class="backdrop">
+            <div class="modal">
+             <div class="modal__title">Formu doldur</div>
+             <div class="modal__form">
+               <div class="modal__form-inputs flex flex-direct-col">
+                <label class="modal__form-input">
                   <input
                     type="text"
                     name="name"
                     id=""
                     placeholder="Əlaqəli şəxs"
                   />
-                </div>
-                <div class="modal__form-input">
-                  <input type="tel" name="tel" id="" placeholder="Nomre" />
-                </div>
-                <div class="modal__form-input">
-                  <input type="email" name="email" id="" placeholder="Email" />
-                </div>
-              </div>
-              <button class="modal__form-btn flex-center">Göndər</button>
-              <button type="button" class="modal__close">
-                <svg
+                  <span class="error-message"></span>
+                 </label>
+                 <label class="modal__form-input">
+                  <input type="tel" name="tel" id="" placeholder="Nömrə" />
+                  <span class="error-message"></span>
+                 </label>
+                 <label class="modal__form-input">
+                  <input type="email" name="email" id="" placeholder="Email" required />
+                  <span class="error-message"></span>
+                </label>
+               </div>
+                <button class="modal__form-btn flex-center">Göndər</button>
+                <button type="button" class="modal__close">
+                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
                   height="16"
                   viewBox="0 0 16 16"
                   fill="none"
-                >
-                  <path
+                  >
+                   <path
                     d="M1.6 16L0 14.4L6.4 8L0 1.6L1.6 0L8 6.4L14.4 0L16 1.6L9.6 8L16 14.4L14.4 16L8 9.6L1.6 16Z"
                     fill="white"
-                  />
-                </svg>
-              </button>
-            </form>
-          </div>
+                    />
+                  </svg>
+                </button>
+               </div>
+               <div class="modal__success flex-direct-col">
+                 <i class="fa-solid fa-circle-check"></i>
+                 Mesajiniz ugurla gonderildi, sizinle elaqe saxlanilacaq!
+               </div>
+             </div>
+           </div>
+          </form>
         </div>
+
       </section>
     </main>
 
