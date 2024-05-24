@@ -183,8 +183,7 @@ formBtn.addEventListener("click", (e) => {
   e.preventDefault();
   if (validateForm()) {
     backdrop.classList.add("opened");
-    const formData = getFormValues();
-    console.log(formData);
+    getFormValues();
   }
 });
 
@@ -192,10 +191,12 @@ const modalSendBtn = document.querySelector(".modal__form-btn");
 
 function getFormModalValues() {
   const modalInputs = document.querySelectorAll(".modal__form-input > input");
+  let isFormValid = true;
 
   modalInputs.forEach((input) => {
     const errorSpan = input.parentElement?.querySelector(".error-message");
     if (!input.value) {
+      isFormValid = false;
       switch (htmlLang) {
         case "az":
           errorSpan.textContent = "Zəhmət olmazsa inputu doldurun!";
@@ -203,12 +204,10 @@ function getFormModalValues() {
 
         case "en":
           errorSpan.textContent = "Please fill input!";
-
           break;
 
         case "ru":
           errorSpan.textContent = "Пожалуйста, заполните данные!";
-
           break;
         default:
           errorSpan.textContent = "Please fill input!";
@@ -217,53 +216,59 @@ function getFormModalValues() {
       errorSpan.style.display = "block";
     } else {
       errorSpan.style.display = "none";
-      const relatedPerson = document.querySelector(
-        ".modal__form-input > input[name='name']"
-      ).value;
-      const phone = document.querySelector(
-        ".modal__form-input > input[name='tel']"
-      ).value;
-      const email = document.querySelector(
-        ".modal__form-input > input[name='email']"
-      ).value;
-
-      const modalValues = {
-        relatedPerson,
-        phone,
-        email,
-      };
-      formValues.push(modalValues);
-      const allFormValues = { allValues: formValues };
-
-      async function postFormValues() {
-        try {
-          const res = await fetch("https://tvradio.coder.az/api/mail", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(allFormValues),
-          });
-
-          if (!res.ok) {
-            throw new Error("Network response was not ok");
-          }
-
-          const responseData = await res.json();
-          const modal = document.querySelector(".modal");
-
-          if (responseData.success) {
-            modal.classList.add("success");
-          }
-          console.log("Success:", responseData);
-        } catch (error) {
-          console.error("Error:", error);
-        }
-      }
-
-      postFormValues();
     }
   });
+
+  if (isFormValid) {
+    const relatedPerson = document.querySelector(
+      ".modal__form-input > input[name='name']"
+    ).value;
+    const phone = document.querySelector(
+      ".modal__form-input > input[name='tel']"
+    ).value;
+    const email = document.querySelector(
+      ".modal__form-input > input[name='email']"
+    ).value;
+
+    const allFormValues = {
+      relatedPerson,
+      phone,
+      email,
+      formDatas: formValues,
+    };
+    console.log(allFormValues);
+
+    async function postFormValues() {
+      try {
+        const res = await fetch("https://tvradio.coder.az/api/mail", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(allFormValues),
+        });
+
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const responseData = await res.json();
+        const modal = document.querySelector(".modal");
+
+        if (responseData.success) {
+          modal.classList.add("success");
+          setTimeout(() => {
+            location.reload();
+          }, 2000);
+        }
+        console.log("Success:", responseData);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+
+    postFormValues();
+  }
 }
 
 modalSendBtn.addEventListener("click", (e) => {
@@ -284,12 +289,10 @@ responseSelects.forEach((select) => {
       responseSelects.forEach((s) => {
         if (s !== e.currentTarget && s.classList.contains("active")) {
           s.classList.remove("active");
-          footer.classList.remove("footer_main");
         }
       });
 
       e.currentTarget.classList.toggle("active");
-      footer.classList.add("footer_main");
     }
   });
 
@@ -358,7 +361,6 @@ document.addEventListener("DOMContentLoaded", () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer ACCESS_TOKEN",
         },
       });
 
@@ -468,11 +470,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                 </div>
                 <div class="response__form-field">
-                    <input type="date" name="${period}" id="myInp" placeholder="${period}" value="" />
+                    <input type="date" name="period" id="myInp" placeholder="${period}" value="" />
                     <span class="error-message"></span>
                 </div>
                 <div class="response__form-field">
-                    <input type="text" name="badge" placeholder="${badge}(AZN)" />
+                    <input type="number" name="badge" placeholder="${badge}(AZN)" />
                     <span class="error-message"></span>
                 </div>
             </div>
@@ -532,7 +534,6 @@ document.addEventListener("DOMContentLoaded", () => {
       removeBtn.addEventListener("click", () => {
         removeBtn.nextElementSibling.remove();
         removeBtn.remove();
-        footer.classList.remove("footer_main");
       });
 
       getFlatCalendar();
@@ -544,34 +545,34 @@ document.addEventListener("DOMContentLoaded", () => {
   createBtn.addEventListener("click", createNewForm);
 
   function getFlatCalendar() {
-    const config = {
-      enableTime: false,
-      dateFormat: "d-m-Y",
-      mode: "range",
-      minDate: "today",
-      disableMobile: "true",
-      onChange: function (selectedDates, dateStr, instance) {
-        const dateInp = document.querySelectorAll("#myInp");
-        dateInp.forEach((inp) => {
+    const dateInputs = document.querySelectorAll('input[name="period"]');
+    dateInputs.forEach((inp) => {
+      const config = {
+        enableTime: false,
+        dateFormat: "d-m-Y",
+        mode: "range",
+        minDate: "today",
+        disableMobile: "true",
+        onChange: function (selectedDates, dateStr, instance) {
           inp.style.fontSize = "1.33rem";
-        });
-      },
-      onOpen: [
-        function (selectedDates, dateStr, instance) {
-          responseSelects.forEach((select) => {
-            select.classList.remove("active");
-          });
         },
-        function (selectedDates, dateStr, instance) {
-          //...
+        onOpen: [
+          function (selectedDates, dateStr, instance) {
+            responseSelects.forEach((select) => {
+              select.classList.remove("active");
+            });
+          },
+          function (selectedDates, dateStr, instance) {
+            //...
+          },
+        ],
+        onClose: function (selectedDates, dateStr, instance) {
+          // ...
         },
-      ],
-      onClose: function (selectedDates, dateStr, instance) {
-        // ...
-      },
-    };
+      };
 
-    flatpickr("#myInp", config);
+      flatpickr(inp, config);
+    });
   }
 
   getFlatCalendar();
