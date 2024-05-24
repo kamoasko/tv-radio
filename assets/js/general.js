@@ -115,6 +115,7 @@ $(document).ready(function () {
     var selectedText = $(this).text();
     $styledSelect.text(selectedText).removeClass("active");
     $this.val($(this).attr("rel"));
+    console.log($this.val());
     $list.hide();
 
     // Save the selected value to localStorage
@@ -124,7 +125,6 @@ $(document).ready(function () {
     if (selectedUrl) {
       window.location.href = selectedUrl;
     }
-    /* alert($this.val()); Uncomment this for demonstration! */
   });
 
   // Hides the unordered list when clicking outside of it
