@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      *,
+      *::after,
+      *::before {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline: 0;
+        box-sizing: inherit;
+      }
+
+      ul > li {
+        display: flex;
+        justify-content: space-between;
+        column-gap: 5px;
+        flex-wrap: wrap;
+      }
+
+      ul > li > span {
+        flex: 1;
+      }
+
+      ul > li > span:last-child {
+        margin-left: auto;
+      }
+    </style>
+    <title>Mail</title>
+  </head>
+  <body>
+    <header>
+      <div class="logo" style="width: 280px; height: 150px; padding: 20px">
+        <img
+          src="./assets/images/logo.png"
+          alt=""
+          style="
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            -o-object-fit: contain;
+            display: block;
+          "
+        />
+      </div>
+    </header>
+    <ul
+      class="info"
+      style="
+        @font-face {
+          font-family: 'Bahnschrift';
+          src: local('Bahnschrift'),
+            url(./assets/fonts/bahnschrift/BAHNSCHRIFT.TTF) format('truetype'),
+            url(./assets/fonts/bahnschrift/BAHNSCHRIFT\ 1.TTF)
+              format('truetype'),
+            url(./assets/fonts/bahnschrift/BAHNSCHRIFT\ 2.TTF)
+              format('truetype'),
+            url(./assets/fonts/bahnschrift/BAHNSCHRIFT\ 3.TTF)
+              format('truetype'),
+            url(./assets/fonts/bahnschrift/BAHNSCHRIFT\ 4.TTF)
+              format('truetype'),
+            url(./assets/fonts/bahnschrift/BAHNSCHRIFT\ 5.TTF)
+              format('truetype'),
+            url(./assets/fonts/bahnschrift/BAHNSCHRIFT\ 6.TTF)
+              format('truetype'),
+            url(./assets/fonts/bahnschrift/BAHNSCHRIFT\ 7.TTF)
+              format('truetype'),
+            url(./assets/fonts/bahnschrift/BAHNSCHRIFT\ 8.TTF)
+              format('truetype'),
+            url(./assets/fonts/bahnschrift/BAHNSCHRIFT\ 9.TTF)
+              format('truetype'),
+            url(./assets/fonts/bahnschrift/BAHNSCHRIFT\ 10.TTF)
+              format('truetype'),
+            url(./assets/fonts/bahnschrift/BAHNSCHRIFT\ 11.TTF)
+              format('truetype'),
+            url(./assets/fonts/bahnschrift/BAHNSCHRIFT\ 12.TTF)
+              format('truetype'),
+            url(./assets/fonts/bahnschrift/BAHNSCHRIFT\ 13.TTF)
+              format('truetype'),
+            url(./assets/fonts/bahnschrift/BAHNSCHRIFT\ 14.TTF)
+              format('truetype');
+          font-weight: 700;
+          font-weight: 400;
+        }
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        font-family: 'Bahnschrift', sans-serif;
+        font-size: 18px;
+        list-style: none;
+        padding: 20px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      "
+    >
+      <li><span>Elaqeli Sexs:</span> Kamran Asgarov</li>
+      <li>Nomre: <a href="tel:+994776432457">+994776432457</a></li>
+      <li>
+        Email:
+        <a href="mailto:kamranasgar0@gmail.com">kamranasgar0@gmail.com</a>
+      </li>
+    </ul>
+    <ul
+      class="structure"
+      style="
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+        padding: 20px;
+        font-family: 'Bahnschrift', sans-serif;
+        font-size: 18px;
+        max-width: 1200px;
+        margin: 20px auto 0;
+      "
+    >
+      <li><span>Şirkət</span> <span>:</span> <span>Azərsun</span></li>
+      <li><span>Məhsul</span> <span>:</span> <span>Bizim tarla</span></li>
+      <li><span>Reklam növü</span> <span>:</span> <span>Televiziya</span></li>
+      <li>
+        <span>Kanallar</span> <span>:</span> <span>ATV, ARB, Xəzər TV</span>
+      </li>
+      <li><span>Xronometraj</span> <span>:</span> <span>20 saniyə</span></li>
+      <li>
+        <span>Period</span> <span>:</span> <span>10.05.2024 – 10.06.2024</span>
+      </li>
+      <li><span>Büdcə</span> <span>:</span> <span>15.000 AZN</span></li>
+    </ul>
+  </body>
+</html>
