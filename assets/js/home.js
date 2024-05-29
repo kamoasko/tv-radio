@@ -34,7 +34,7 @@ function getFormValues() {
     );
     otherTiming !== " saniyə" ? timing.push(otherTiming) : "";
     const period = form.querySelector('input[name="period"]')?.value;
-    const budget = form.querySelector('input[name="badge"]')?.value;
+    const budget = form.querySelector('input[name="budget"]')?.value;
 
     formData = {
       company,
@@ -55,7 +55,9 @@ function getFormValues() {
 // Function to validate form inputs
 function validateForm() {
   let isValid = true;
-  const inputs = document.querySelectorAll('.form_data input[type="text"]');
+  const inputs = document.querySelectorAll(
+    '.form_data input[type="text"], .budget_inp > input[name="budget"]'
+  );
   inputs.forEach((input) => {
     const errorSpan = input.parentElement?.querySelector(".error-message");
     if (!input.value && input.type !== "checkbox") {
@@ -78,7 +80,7 @@ function validateForm() {
           errorSpan.textContent = "Please fill input!";
           break;
       }
-      errorSpan.style.display = "block";
+      errorSpan.style.display = "inline";
     } else {
       errorSpan.style.display = "none";
     }
@@ -127,7 +129,7 @@ function validateForm() {
             errorSpan.textContent = "Please select at least one option!";
             break;
         }
-        errorSpan.style.display = "block";
+        errorSpan.style.display = "inline";
       }
     } else if (errorSpan) {
       errorSpan.style.display = "none";
@@ -168,7 +170,7 @@ function validateForm() {
         if (!group.contains(errorSpan)) {
           group.appendChild(errorSpan);
         }
-        errorSpan.style.display = "block";
+        errorSpan.style.display = "inline";
       } else {
         errorSpan.style.display = "none";
       }
@@ -213,7 +215,7 @@ function getFormModalValues() {
           errorSpan.textContent = "Please fill input!";
           break;
       }
-      errorSpan.style.display = "block";
+      errorSpan.style.display = "inline";
     } else {
       errorSpan.style.display = "none";
     }
@@ -350,6 +352,28 @@ function renderTiming(datas, container) {
 
 // Fetch data from API
 document.addEventListener("DOMContentLoaded", () => {
+  const inputs = document.querySelectorAll(".input_title > input");
+
+  inputs.forEach((input) => {
+    const span = input.parentElement.querySelector("span:first-of-type");
+
+    input.addEventListener("input", (e) => {
+      if (input.value.trim() !== "") {
+        span.textContent = input.value;
+        span.style.opacity = 1;
+        span.style.visibility = "visible";
+      } else {
+        span.style.opacity = 0;
+        span.style.visibility = "hidden";
+      }
+    });
+
+    input.addEventListener("blur", () => {
+      span.style.opacity = 0;
+      span.style.visibility = "hidden";
+    });
+  });
+
   const apiUrl = `https://tvradio.coder.az/${htmlLang}/api`;
   const adsTypeOptions = document.getElementById("adTypeOptions");
   const channels = document.getElementById("channels");
@@ -393,187 +417,239 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Function to create new form
-  const createBtn = document.querySelector(".add_btn");
-  const resForm = document.querySelector(
-    ".response__form > form > div:nth-of-type(n+1)"
-  );
+  function getSelectedDates() {
+    const dateInputs = document.querySelectorAll('input[name="period"]');
+    const selectedDates = [];
 
-  function createNewForm() {
-    async function getTranslates() {
-      const res = await fetch(
-        `https://tvradio.coder.az/api/translates?lang=${htmlLang}`
-      );
-      const data = await res.json();
+    dateInputs.forEach((input) => {
+      const flatpickrInstance = input._flatpickr;
+      if (flatpickrInstance) {
+        selectedDates.push(flatpickrInstance.selectedDates);
+      } else {
+        selectedDates.push([]);
+      }
+    });
 
-      const company = data.company;
-      const product = data.product;
-      const adType = data.ad_type;
-      const channels = data.channels;
-      const badge = data.badge;
-      const period = data.period;
-      const timing = data.timing;
-      const second = data.seconds;
-
-      // console.log(data)
-      let newForm = `
-            <button type="button" class="remove_btn flex">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M1.6 16L0 14.4L6.4 8L0 1.6L1.6 0L8 6.4L14.4 0L16 1.6L9.6 8L16 14.4L14.4 16L8 9.6L1.6 16Z" fill="#5B5757"/>
-                </svg>
-            </button>
-            <div class="form_data rff_new">
-                <div class="response__form-field inp">
-                    <input data-title="Şirkıtin adı ümumi" type="text" name="company" placeholder="${company}" />
-                    <span class="error-message"></span>
-                </div>
-                <div class="response__form-field">
-                    <input type="text" name="product" placeholder="${product}" />
-                    <span class="error-message"></span>
-                </div>
-                <div class="response__form-field rff">
-                <span class="error-message"></span>
-                    <div class="selected flex-center" value="Reklam növü">
-                        <span>${adType}</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-                            <path d="M1.5 1L6.9176 8.88014C6.95733 8.93794 7.04267 8.93794 7.0824 8.88014L12.5 1" stroke="#5D5858" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="response__form-options flex flex-direct-col" id="adTypeOptions"></div>
-                </div>
-                <div class="response__form-field rff">
-                <span class="error-message"></span>
-                    <div class="selected flex-center" value="${channels}">
-                        <span>${channels}</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-                            <path d="M1.5 1L6.9176 8.88014C6.95733 8.93794 7.04267 8.93794 7.0824 8.88014L12.5 1" stroke="#5D5858" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="response__form-options flex flex-direct-col rfo" id="channels"></div>
-                </div>
-                <div class="response__form-field rff">
-                    <div class="selected flex-center">
-                        <span>${timing}</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-                            <path d="M1.5 1L6.9176 8.88014C6.95733 8.93794 7.04267 8.93794 7.0824 8.88014L12.5 1" stroke="#5D5858" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <span class="error-message"></span>
-                    <div class="response__form-options rfo flex flex-direct-col" id="timing">
-                        <div class="flex-center rfo1" value="">
-                            <label class="flex align-items-center justify-content-between">
-                                <span>Digər&ThickSpace;</span>
-                                <span>|</span>
-                                <input type="number" name="otherTiming" placeholder="${second}" />
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="response__form-field">
-                    <input type="date" name="period" id="myInp" placeholder="${period}" value="" />
-                    <span class="error-message"></span>
-                </div>
-                <div class="response__form-field">
-                    <input type="number" name="badge" placeholder="${badge}(AZN)" />
-                    <span class="error-message"></span>
-                </div>
-            </div>
-        `;
-
-      resForm.insertAdjacentHTML("afterend", newForm);
-      footer.classList.add("footer_main");
-      const newFormElement = resForm.parentElement.querySelector(".rff_new");
-
-      // Apply event listeners and fetch logic to the new form
-      const newAdTypeOptions = newFormElement.querySelector("#adTypeOptions");
-      const newChannels = newFormElement.querySelector("#channels");
-      const newTiming = newFormElement.querySelector("#timing");
-      fetchData("/ads", (datas) => renderAdsType(datas, newAdTypeOptions));
-      fetchData("/channels?type=4", (datas) =>
-        renderChannels(datas, newChannels)
-      );
-      fetchData("/times", (datas) => renderTiming(datas, newTiming));
-
-      newAdTypeOptions.addEventListener("click", (e) => {
-        if (e.target.classList.contains("flex-center")) {
-          let adsTypeId = e.target.getAttribute("data-id");
-          newChannels.innerHTML = "";
-          fetchData(`/channels?type=${adsTypeId}`, (datas) =>
-            renderChannels(datas, newChannels)
-          );
-        }
-      });
-
-      // Event listener for new selects
-      const newResponseSelects = newFormElement.querySelectorAll(".rff");
-
-      newResponseSelects.forEach((select) => {
-        select.addEventListener("click", (e) => {
-          if (!e.target.matches("input")) {
-            newResponseSelects.forEach((s) => {
-              if (s !== e.currentTarget && s.classList.contains("active")) {
-                s.classList.remove("active");
-              }
-            });
-            e.currentTarget.classList.toggle("active");
-          }
-        });
-
-        const options = select.querySelector(".response__form-options");
-        const selectedOptionText = select.querySelector(".selected > span");
-
-        options.addEventListener("click", (e) => {
-          if (e.target.classList.contains("flex-center")) {
-            const optionText = e.target.textContent.trim();
-            selectedOptionText.textContent = optionText;
-          }
-        });
-      });
-
-      const removeBtn = document.querySelector(".remove_btn");
-      removeBtn.addEventListener("click", () => {
-        removeBtn.nextElementSibling.remove();
-        removeBtn.remove();
-      });
-
-      getFlatCalendar();
-    }
-
-    getTranslates();
+    return selectedDates;
   }
 
-  createBtn.addEventListener("click", createNewForm);
-
-  function getFlatCalendar() {
+  function getFlatCalendar(selectedDates = []) {
     const dateInputs = document.querySelectorAll('input[name="period"]');
-    dateInputs.forEach((inp) => {
+
+    dateInputs.forEach((inp, index) => {
       const config = {
         enableTime: false,
         dateFormat: "d-m-Y",
+        // locale: htmlLang,
         mode: "range",
         minDate: "today",
         disableMobile: "true",
         onChange: function (selectedDates, dateStr, instance) {
           inp.style.fontSize = "1.33rem";
         },
-        onOpen: [
-          function (selectedDates, dateStr, instance) {
-            responseSelects.forEach((select) => {
-              select.classList.remove("active");
-            });
-          },
-          function (selectedDates, dateStr, instance) {
-            //...
-          },
-        ],
-        onClose: function (selectedDates, dateStr, instance) {
+        onOpen: function () {
+          // responseSelects.forEach(select => {
+          //     if (select.classList.contains("active")) {
+          //         select.classList.remove("active");
+          //     }
+          // });
+        },
+        onClose: function () {
           // ...
         },
       };
 
       flatpickr(inp, config);
+
+      // Reapply previously selected dates
+      if (selectedDates[index] && selectedDates[index].length > 0) {
+        inp._flatpickr.setDate(selectedDates[index], true);
+      }
     });
   }
+
+  // Function to create new form
+  const createBtn = document.querySelector(".add_btn");
+  const resForm = document.querySelector(
+    ".response__form > form > div:nth-of-type(n+1)"
+  );
+
+  async function getTranslates() {
+    const res = await fetch(
+      `https://tvradio.coder.az/api/translates?lang=${htmlLang}`
+    );
+    const data = await res.json();
+    return data;
+  }
+
+  function createNewForm(data) {
+    const selectedDates = getSelectedDates();
+
+    const {
+      company,
+      product,
+      ad_type,
+      channels,
+      badge,
+      period,
+      timing,
+      second,
+    } = data;
+    let newForm = `
+        <button type="button" class="remove_btn flex">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M1.6 16L0 14.4L6.4 8L0 1.6L1.6 0L8 6.4L14.4 0L16 1.6L9.6 8L16 14.4L14.4 16L8 9.6L1.6 16Z" fill="#5B5757"/>
+            </svg>
+        </button>
+        <div class="form_data rff_new">
+            <div class="response__form-field input_title">
+                <input data-title="Şirkıtin adı ümumi" type="text" name="company" placeholder="${company}" />
+                <span></span>
+                <span class="error-message"></span>
+            </div>
+            <div class="response__form-field input_title">
+                <input type="text" name="product" placeholder="${product}" />
+                <span></span>
+                <span class="error-message"></span>
+            </div>
+            <div class="response__form-field rff">
+                <span class="error-message"></span>
+                <div class="selected flex-center" value="${ad_type}">
+                    <span>${ad_type}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
+                        <path d="M1.5 1L6.9176 8.88014C6.95733 8.93794 7.04267 8.93794 7.0824 8.88014L12.5 1" stroke="#5D5858" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="response__form-options flex flex-direct-col" id="adTypeOptions"></div>
+            </div>
+            <div class="response__form-field rff">
+                <span class="error-message"></span>
+                <div class="selected flex-center" value="${channels}">
+                    <span>${channels}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
+                        <path d="M1.5 1L6.9176 8.88014C6.95733 8.93794 7.04267 8.93794 7.0824 8.88014L12.5 1" stroke="#5D5858" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="response__form-options flex flex-direct-col rfo" id="channels"></div>
+            </div>
+            <div class="response__form-field rff">
+                <div class="selected flex-center">
+                    <span>${timing}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
+                        <path d="M1.5 1L6.9176 8.88014C6.95733 8.93794 7.04267 8.93794 7.0824 8.88014L12.5 1" stroke="#5D5858" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <span class="error-message"></span>
+                <div class="response__form-options rfo flex flex-direct-col" id="timing">
+                    <div class="flex-center rfo1" value="">
+                        <label class="flex align-items-center justify-content-between">
+                            <span>Digər&ThickSpace;</span>
+                            <span>|</span>
+                            <input type="number" name="otherTiming" placeholder="${second}" />
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="response__form-field">
+                <input type="date" name="period" id="myInp" placeholder="${period}" value="" />
+                <span class="error-message"></span>
+            </div>
+            <div class="response__form-field budget_inp">
+                <input type="number" name="budget" placeholder="${badge}(AZN)" />
+                <span class="error-message"></span>
+            </div>
+        </div>
+    `;
+
+    const resFormBtn = document.querySelector(".response__form-buttons");
+    resFormBtn.insertAdjacentHTML("beforebegin", newForm);
+
+    const newFormElements = resForm.parentElement.querySelectorAll(".rff_new");
+    attachEventListeners(newFormElements[newFormElements.length - 1]);
+
+    getFlatCalendar(selectedDates);
+  }
+
+  function attachEventListeners(newFormElement) {
+    const newInputs = newFormElement.querySelectorAll(".input_title > input");
+    newInputs.forEach((input) => {
+      const span = input.parentElement.querySelector("span:first-of-type");
+
+      input.addEventListener("input", () => {
+        if (input.value.trim() !== "") {
+          span.textContent = input.value;
+          span.style.opacity = 1;
+          span.style.visibility = "visible";
+        } else {
+          span.style.opacity = 0;
+          span.style.visibility = "hidden";
+        }
+      });
+
+      input.addEventListener("blur", () => {
+        span.style.opacity = 0;
+        span.style.visibility = "hidden";
+      });
+    });
+
+    const newAdTypeOptions = newFormElement.querySelector("#adTypeOptions");
+    const newChannels = newFormElement.querySelector("#channels");
+    const newTiming = newFormElement.querySelector("#timing");
+
+    fetchData("/ads", (datas) => renderAdsType(datas, newAdTypeOptions));
+    fetchData("/channels?type=4", (datas) =>
+      renderChannels(datas, newChannels)
+    );
+    fetchData("/times", (datas) => renderTiming(datas, newTiming));
+
+    newAdTypeOptions.addEventListener("click", (e) => {
+      if (e.target.classList.contains("flex-center")) {
+        let adsTypeId = e.target.getAttribute("data-id");
+        newChannels.innerHTML = "";
+        fetchData(`/channels?type=${adsTypeId}`, (datas) =>
+          renderChannels(datas, newChannels)
+        );
+      }
+    });
+
+    const newResponseSelects = newFormElement.querySelectorAll(
+      ".response__form-field.rff"
+    );
+    newResponseSelects.forEach((select) => {
+      select.addEventListener("click", (e) => {
+        if (!e.target.matches("input")) {
+          newResponseSelects.forEach((s) => {
+            if (s !== e.currentTarget && s.classList.contains("active")) {
+              s.classList.remove("active");
+            }
+          });
+          select.classList.toggle("active");
+        }
+      });
+
+      const options = select.querySelector(".response__form-options");
+      const selectedOptionText = select.querySelector(".selected > span");
+
+      options.addEventListener("click", (e) => {
+        if (e.target.classList.contains("flex-center")) {
+          const optionText = e.target.textContent.trim();
+          selectedOptionText.textContent = optionText;
+        }
+      });
+    });
+
+    const removeBtn = newFormElement.previousElementSibling;
+    removeBtn.addEventListener("click", () => {
+      removeBtn.nextElementSibling.remove();
+      removeBtn.remove();
+    });
+  }
+
+  createBtn.addEventListener("click", async (e) => {
+    footer.classList.add("footer_main");
+    const translates = await getTranslates();
+    createNewForm(translates);
+  });
 
   getFlatCalendar();
 });
