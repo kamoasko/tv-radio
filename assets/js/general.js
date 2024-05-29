@@ -43,7 +43,6 @@ hamburger.addEventListener("click", openNavMenu);
 closeHamburger.addEventListener("click", closeNavMenu);
 
 // default language change
-// Iterate over each select element
 $(document).ready(function () {
   // Cache the number of options
   var $this = $("#lang"),
@@ -60,30 +59,20 @@ $(document).ready(function () {
   // Hides the select element
   $this.addClass("s-hidden");
 
-  // Wrap the select element in a div
   $this.wrap('<div class="select"></div>');
-
-  // Insert a styled div to sit over the top of the hidden select element
   $this.after('<div class="styledSelect"></div>');
-
-  // Cache the styled div
   var $styledSelect = $this.next("div.styledSelect");
 
-  // Function to set the styled select text based on the select element value
   function setStyledSelectText() {
     let selectedOption = $this.children("option:selected").text();
     $styledSelect.text(selectedOption);
   }
-
-  // Set the initial styled select text
   setStyledSelectText();
 
-  // Insert an unordered list after the styled div and also cache the list
   var $list = $("<ul />", {
     class: "options",
   }).insertAfter($styledSelect);
 
-  // Insert a list item into the unordered list for each select option
   for (var i = 0; i < numberOfOptions; i++) {
     $("<li />", {
       text: $this.children("option").eq(i).text(),
@@ -137,7 +126,7 @@ $(document).ready(function () {
   var savedLang = localStorage.getItem("selectedLang");
   if (savedLang) {
     $this.val(savedLang);
-    setStyledSelectText(); // Update the styled select text to the saved value
+    setStyledSelectText();
   }
 });
 
