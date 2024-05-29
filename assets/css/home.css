@@ -7,7 +7,7 @@
   padding: 8.3rem 1.5rem 15rem;
 }
 
-.response>h1 {
+.response > h1 {
   text-align: center;
 }
 
@@ -24,7 +24,7 @@
   margin-top: 2.1rem;
 }
 
-.form>div:nth-child(2n + 1) {
+.form > div:nth-child(2n + 1) {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(192px, 1fr));
   gap: 2.5rem 1.1rem;
@@ -41,12 +41,64 @@
   position: relative;
 }
 
+/* show title on hover */
+
+.input_title > span:first-of-type {
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 15%;
+  padding: 0.5rem;
+  border: 0.1rem solid var(--color-black);
+  background-color: var(--color-white);
+  font-size: 1.2rem;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 60;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s ease;
+  -o-transition: 0.3s ease;
+  -moz-transition: 0.3s ease;
+  -webkit-transition: 0.3s ease;
+}
+
+.input_title > span:first-of-type::after {
+  bottom: 100%;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-bottom: 9px solid var(--color-black);
+}
+
+.input_title > span:first-of-type::before {
+  bottom: 99.9%;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid var(--color-white);
+  z-index: 1;
+}
+
+.input_title > span:first-of-type::after,
+.input_title > span:first-of-type::before {
+  content: "";
+  position: absolute;
+  left: calc(50%);
+  width: 0;
+  height: 0;
+  transform: translateX(-50%);
+  border-radius: 1px;
+}
+
 .rff {
   cursor: pointer;
   position: relative;
 }
 
-.response__form-field>input {
+.response__form-field > input {
   width: 100%;
   font-size: clamp(1.6rem, 4vw, 2rem);
   font-family: var(--main-font);
@@ -54,6 +106,18 @@
   color: var(--color-light-black);
   position: relative;
   display: block;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 .error-message {
@@ -66,56 +130,29 @@
   color: var(--color-error);
 }
 
-.response__form-field>input::-webkit-input-placeholder {
+.response__form-field > input::-webkit-input-placeholder {
   display: flex;
   text-align: center;
 }
 
-.response__form-field>input::-moz-placeholder {
+.response__form-field > input::-moz-placeholder {
   display: flex;
   text-align: center;
 }
 
-.response__form-field>input:-ms-input-placeholder {
+.response__form-field > input:-ms-input-placeholder {
   display: flex;
   text-align: center;
 }
 
-.response__form-field>input::-ms-input-placeholder {
+.response__form-field > input::-ms-input-placeholder {
   display: flex;
   text-align: center;
 }
 
-.response__form-field>input::placeholder {
+.response__form-field > input::placeholder {
   display: flex;
   text-align: center;
-}
-
-[data-title]:hover:after {
-  opacity: 1;
-  transition: all 0.1s ease 0.5s;
-  visibility: visible;
-}
-
-[data-title]:after {
-  content: attr(data-title);
-  background-color: #00ff00;
-  color: #111;
-  font-size: 150%;
-  position: absolute;
-  padding: 1px 5px 2px 5px;
-  bottom: -1.6em;
-  left: 100%;
-  white-space: nowrap;
-  box-shadow: 1px 1px 3px #222222;
-  opacity: 0;
-  border: 1px solid #111111;
-  z-index: 99999;
-  visibility: hidden;
-}
-
-[data-title] {
-  position: relative;
 }
 
 .selected {
@@ -136,7 +173,7 @@
   z-index: 100;
 }
 
-.response__form-options>div {
+.response__form-options > div {
   height: 3.8rem;
   width: 11.6rem;
   overflow: hidden;
@@ -146,27 +183,27 @@
   background-color: var(--color-white);
 }
 
-.rfo>div {
+.rfo > div {
   width: 15rem;
 }
 
-.response__form-options>div:hover,
-.rfo>div:hover>label,
-.response__form-options>div:active,
-.rfo>div:active>label,
-.response__form-options>div.selected>label,
-.rfo>div.selected {
+.response__form-options > div:hover,
+.rfo > div:hover > label,
+.response__form-options > div:active,
+.rfo > div:active > label,
+.response__form-options > div.selected > label,
+.rfo > div.selected {
   background-color: var(--color-main);
   color: var(--color-white);
 }
 
-.response__form-options>div.rfo1:hover,
-.rfo>div.rfo1:hover>label {
+.response__form-options > div.rfo1:hover,
+.rfo > div.rfo1:hover > label {
   background-color: var(--color-white);
   color: var(--color-light-black);
 }
 
-.response__form-options>div>label {
+.response__form-options > div > label {
   width: 100%;
   height: 100%;
   padding: 1rem;
@@ -177,16 +214,17 @@
   font-size: 1.45rem;
 }
 
-.response__form-options>div>label>span:nth-child(2) {
+.response__form-options > div > label > span:nth-child(2) {
   font-size: 1.3rem;
 }
 
-.response__form-options>div>label>input[type="number"] {
+.response__form-options > div > label > input[type="number"] {
   height: 3.8rem;
   font-family: var(--main-font);
+  width: 50%;
 }
 
-.rff.active>.response__form-options {
+.rff.active > .response__form-options {
   visibility: visible;
   opacity: 1;
   transition: 0.4s ease;
@@ -226,8 +264,8 @@
   transition: 0.3s ease all;
 }
 
-.btn:hover>svg>path,
-.btn:active>svg>path {
+.btn:hover > svg > path,
+.btn:active > svg > path {
   fill: var(--color-white);
 }
 
@@ -296,7 +334,7 @@ div.backdrop {
   height: 4.3rem;
 }
 
-.modal__form-input>input {
+.modal__form-input > input {
   width: 100%;
   height: 100%;
   font-size: 1.6rem;
@@ -331,7 +369,7 @@ div.backdrop {
   right: 1rem;
 }
 
-.modal__form-input>.error-message {
+.modal__form-input > .error-message {
   position: static;
 }
 
@@ -359,54 +397,53 @@ div.backdrop {
 
 @media only screen and (max-width: 1439px) {
   .response__form-field {
-      grid-column: span 2;
+    grid-column: span 2;
   }
 }
 
 @media only screen and (max-width: 1300px) {
   .response {
-      margin-top: 10rem;
-      padding: 4.1rem 1.5rem;
+    margin-top: 10rem;
+    padding: 4.1rem 1.5rem;
   }
 }
 
 @media only screen and (max-width: 1200px) {
   .response {
-      margin-top: 4rem;
-      padding: 2.9rem 2rem;
+    margin-top: 4rem;
+    padding: 2.9rem 2rem;
   }
 }
 
 @media only screen and (max-width: 768px) {
   .response__form {
-      margin-top: 4.2rem;
+    margin-top: 4.2rem;
   }
 }
 
 @media only screen and (max-width: 767px) {
   .modal__form-btn {
-      margin-top: 6rem;
+    margin-top: 6rem;
   }
 }
 
-
 @media only screen and (max-width: 480px) {
   .response {
-      margin-top: 4rem;
-      padding: 2rem;
+    margin-top: 4rem;
+    padding: 2rem;
   }
 
   .response__form {
-      margin-top: 2.8rem;
+    margin-top: 2.8rem;
   }
 
   .response__form-buttons {
-      flex-direction: column;
-      row-gap: 1.2rem;
-      margin-top: 3.8rem;
+    flex-direction: column;
+    row-gap: 1.2rem;
+    margin-top: 3.8rem;
   }
 
   .btn {
-      width: 100%;
+    width: 100%;
   }
 }
