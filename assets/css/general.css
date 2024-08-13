@@ -2,6 +2,7 @@
 .disable {
   color: var(--color-light-black);
 }
+
 .flex {
   display: flex;
 }
@@ -43,13 +44,13 @@
 
 .header {
   padding: 3.4rem 0;
-  position: -webkit-sticky;
+  /* position: -webkit-sticky;
   position: sticky;
   top: 0;
-  left: 0;
+  left: 0; */
   width: 100%;
   background-color: var(--color-white);
-  z-index: 89;
+  /* z-index: 89; */
 }
 
 .navbar__logo {
@@ -60,6 +61,7 @@
 .navbar__menu {
   gap: 3.5rem;
   font-size: 2.4rem;
+  font-weight: 400;
 }
 
 .navbar__menu > li {
@@ -102,6 +104,7 @@
   border: 0.1rem solid var(--color-darker);
   padding: 1rem 3rem;
   font-size: 1.6rem;
+  background-color: white;
 }
 
 .dropdown > li > a:hover,
@@ -135,6 +138,7 @@
 }
 
 .styledSelect {
+  font-weight: 400 !important;
   position: absolute;
   top: 0;
   right: 0;
@@ -179,6 +183,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: white;
 }
 
 .options li:hover {
@@ -203,6 +208,7 @@
   font-weight: 400;
   padding: 1.2rem 3.8rem;
   z-index: 99;
+  grid-row: 3;
 }
 
 /* responsive */
@@ -211,6 +217,12 @@
   .navbar__menu {
     gap: 2.1rem;
     font-size: 2rem;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .navbar__menu {
+    gap: 1.5rem;
   }
 }
 
@@ -288,6 +300,7 @@
     padding: unset;
     font-size: 1.6rem;
     font-weight: 600;
+    background-color: transparent;
   }
 
   .dropdown > li > a:hover,
@@ -346,7 +359,7 @@
   }
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
   .footer {
     margin-top: 9.3rem;
   }

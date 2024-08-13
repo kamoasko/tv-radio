@@ -214,7 +214,7 @@
         <h1>Sorğunu doldur</h1>
 
         <!-- Response Form -->
-        <div class="response__form">
+        <div class="response__form container">
           <form action="" class="form justify-content-between" id="form">
             <div class="form_data">
               <label class="response__form-field input_title">
@@ -224,7 +224,7 @@
               </label>
               <div class="response__form-field input_title">
                 <input type="text" name="product" id="" placeholder="Məhsul" />
-                <span>Sirket</span>
+                <span></span>
                 <span class="error-message"></span>
               </div>
 
@@ -247,16 +247,24 @@
                     />
                   </svg>
                 </div>
-                <div
-                  class="response__form-options flex flex-direct-col"
-                  id="adTypeOptions"
-                ></div>
+                <div>
+                  <div
+                    class="response__form-options flex flex-direct-col"
+                    id="adTypeOptions"
+                  ></div>
+                </div>
               </div>
 
               <div class="response__form-field rff" name="" id="">
                 <span class="error-message"></span>
                 <div class="selected flex-center">
                   <span>Kanal</span>
+                  <input
+                    type="text"
+                    class="selected_options"
+                    value=""
+                    readonly="readonly"
+                  />
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="14"
@@ -272,16 +280,24 @@
                     />
                   </svg>
                 </div>
-                <div
-                  class="response__form-options flex flex-direct-col rfo"
-                  id="channels"
-                ></div>
+                <div>
+                  <div
+                    class="response__form-options flex flex-direct-col rfo"
+                    id="channels"
+                  ></div>
+                </div>
               </div>
 
               <div class="response__form-field rff" name="" id="">
                 <span class="error-message"></span>
                 <div class="selected flex-center">
                   <span>Xronometraj</span>
+                  <input
+                    type="text"
+                    class="selected_options"
+                    value=""
+                    readonly="readonly"
+                  />
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="14"
@@ -297,34 +313,43 @@
                     />
                   </svg>
                 </div>
-                <div
-                  class="response__form-options rfo flex flex-direct-col"
-                  id="timing"
-                >
-                  <div class="flex-center rfo1">
-                    <label
-                      class="flex align-items-center justify-content-between"
-                      for=""
-                    >
-                      <span>Digər&ThickSpace;</span>
-                      <span>|</span>
-                      <input
-                        type="number"
-                        name="otherTiming"
-                        id=""
-                        data-id=""
-                        placeholder="saniyə"
-                        value=""
-                      />
-                    </label>
+                <div>
+                  <div
+                    class="response__form-options rfo flex flex-direct-col rfot"
+                    id="timing"
+                  >
+                    <div class="flex-center rfo1">
+                      <label
+                        class="flex align-items-center justify-content-between"
+                        for=""
+                      >
+                        <span>Digər&ThickSpace;</span>
+                        <span>|</span>
+                        <input
+                          type="number"
+                          name="otherTiming"
+                          id=""
+                          data-id=""
+                          placeholder="saniyə"
+                          value=""
+                        />
+                      </label>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div class="response__form-field" name="" id="">
+              <div class="response__form-field flex-center" name="" id="">
                 <input
                   type="date"
-                  name="period"
+                  name="beginningPeriod"
+                  id="myInp"
+                  placeholder="Müddət"
+                  value=""
+                />
+                <input
+                  type="date"
+                  name="endingPeriod"
                   id="myInp"
                   placeholder="Müddət"
                   value=""
@@ -335,12 +360,19 @@
               <div
                 class="response__form-field budget_inp response__form_overflow_hidden"
               >
-                <input
-                  type="number"
-                  name="budget"
-                  id=""
-                  placeholder="Büdcə(AZN)"
-                />
+                <div class="flex align-items-center">
+                  <input
+                    type="number"
+                    name="budget"
+                    id=""
+                    placeholder="Büdcə"
+                  />
+                  <select name="currency" id="">
+                    <option value="AZN">AZN</option>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                  </select>
+                </div>
                 <span class="error-message"></span>
               </div>
             </div>
@@ -411,9 +443,10 @@
                     </svg>
                   </button>
                 </div>
+                <div class="spinner"></div>
                 <div class="modal__success flex-direct-col">
                   <i class="fa-solid fa-circle-check"></i>
-                  succes_form_message
+                  Uğurla göndərildi. Tezliklə əlaqə saxlanılacaq
                 </div>
               </div>
             </div>
