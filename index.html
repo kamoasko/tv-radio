@@ -218,162 +218,110 @@
           <form action="" class="form justify-content-between" id="form">
             <div class="form_data">
               <label class="response__form-field input_title">
-                <input type="text" name="company" id="" placeholder="Şirkət" />
+                <input
+                  type="text"
+                  name="company"
+                  id=""
+                  placeholder="Şirkət"
+                  tabindex="1"
+                />
                 <span></span>
                 <span class="error-message"></span>
               </label>
               <div class="response__form-field input_title">
-                <input type="text" name="product" id="" placeholder="Məhsul" />
+                <input type="text" name="product" id="" placeholder="Məhsul" tabindex="2" />
                 <span></span>
                 <span class="error-message"></span>
               </div>
 
-              <div class="response__form-field rff" name="" id="">
+              <div class="response__form-field rff " name="" id="" tabindex="3">
                 <span class="error-message"></span>
                 <div class="selected flex-center">
-                  <span>Reklamın tipi</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="10"
-                    viewBox="0 0 14 10"
-                    fill="none"
-                  >
-                    <path
-                      d="M1.5 1L6.9176 8.88014C6.95733 8.93794 7.04267 8.93794 7.0824 8.88014L12.5 1"
-                      stroke="#5D5858"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                  </svg>
+                  <span>Reklamın növü</span>
+                  <i class="fa-solid fa-chevron-down"></i>
                 </div>
-                <div>
-                  <div
-                    class="response__form-options flex flex-direct-col"
-                    id="adTypeOptions"
-                  ></div>
-                </div>
+                <div><div class="response__form-options flex flex-direct-col" id="adTypeOptions"></div></div>
               </div>
 
-              <div class="response__form-field rff" name="" id="">
-                <span class="error-message"></span>
-                <div class="selected flex-center">
+              <div class="response__form-field rff" name="" id="" tabindex="4">
+               <span class="error-message"></span>
+                <div class="selected input_title flex-center">
+                  <span></span>
                   <span>Kanal</span>
-                  <input
-                    type="text"
-                    class="selected_options"
-                    value=""
-                    readonly="readonly"
-                  />
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="10"
-                    viewBox="0 0 14 10"
-                    fill="none"
-                  >
-                    <path
-                      d="M1.5 1L6.9176 8.88014C6.95733 8.93794 7.04267 8.93794 7.0824 8.88014L12.5 1"
-                      stroke="#5D5858"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                  </svg>
+                  <input type="text" class="selected_options" value="" readonly="readonly">
+                  <i class="fa-solid fa-chevron-down"></i>
                 </div>
-                <div>
-                  <div
-                    class="response__form-options flex flex-direct-col rfo"
-                    id="channels"
-                  ></div>
-                </div>
+                <div><div class="response__form-options flex flex-direct-col rfo" id="channels"></div></div>
               </div>
 
-              <div class="response__form-field rff" name="" id="">
+              <div class="response__form-field rff" name="" id="" tabindex="5">
                 <span class="error-message"></span>
                 <div class="selected flex-center">
+                  <input type="text" class="selected_options" value="" readonly="readonly">
                   <span>Xronometraj</span>
-                  <input
-                    type="text"
-                    class="selected_options"
-                    value=""
-                    readonly="readonly"
-                  />
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="10"
-                    viewBox="0 0 14 10"
-                    fill="none"
-                  >
-                    <path
-                      d="M1.5 1L6.9176 8.88014C6.95733 8.93794 7.04267 8.93794 7.0824 8.88014L12.5 1"
-                      stroke="#5D5858"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
+                  <i class="fa-solid fa-chevron-down"></i>
                   </svg>
                 </div>
                 <div>
-                  <div
-                    class="response__form-options rfo flex flex-direct-col rfot"
-                    id="timing"
-                  >
-                    <div class="flex-center rfo1">
-                      <label
-                        class="flex align-items-center justify-content-between"
-                        for=""
-                      >
-                        <span>Digər&ThickSpace;</span>
-                        <span>|</span>
-                        <input
-                          type="number"
-                          name="otherTiming"
-                          id=""
-                          data-id=""
-                          placeholder="saniyə"
-                          value=""
-                        />
-                      </label>
-                    </div>
-                  </div>
+                 <div class="response__form-options rfo flex flex-direct-col rfot" id="timing">
+                   <div class="flex-center rfo1">
+                     <label
+                       class="flex align-items-center justify-content-between"
+                       for=""
+                     >
+                       <span>Digər&ThickSpace;</span>
+                       <span>|</span>
+                       <input
+                         type="number"
+                         name="otherTiming"
+                         id=""
+                         data-id=""
+                         placeholder="saniyə"
+                         value=""
+                       />
+                     </label>
+                   </div>
+                 </div>
                 </div>
-              </div>
+               </div>
 
-              <div class="response__form-field flex-center" name="" id="">
+              <div
+                class="response__form-field rff_date flex-center"
+                name=""
+                id=""
+              >
                 <input
                   type="date"
                   name="beginningPeriod"
                   id="myInp"
-                  placeholder="Müddət"
+                  placeholder="Muddet"
                   value=""
+                  tabindex="6"
                 />
                 <input
                   type="date"
                   name="endingPeriod"
                   id="myInp"
-                  placeholder="Müddət"
+                  placeholder="Muddet"
                   value=""
+                  tabindex="7"
                 />
                 <span class="error-message"></span>
               </div>
 
-              <div
-                class="response__form-field budget_inp response__form_overflow_hidden"
-              >
-                <div class="flex align-items-center">
-                  <input
-                    type="number"
-                    name="budget"
-                    id=""
-                    placeholder="Büdcə"
-                  />
-                  <select name="currency" id="">
-                    <option value="AZN">AZN</option>
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                  </select>
-                </div>
-                <span class="error-message"></span>
+              <div class="response__form-field budget_inp response__form_overflow_hidden flex align-items-center">
+                   <input
+                     type="number"
+                     name="budget"
+                     id=""
+                     placeholder="Büdcə"
+                     tabindex="8"
+                   />
+                   <select name="currency" id="currency">
+          <option value="AZN">AZN</option>
+          <option value="USD">USD</option>
+          <option value="EUR">EUR</option>
+    </select>                <span class="error-message"></span>
               </div>
             </div>
 
@@ -398,62 +346,57 @@
               <button class="btn btn1 flex-center" id="form_btn">Göndər</button>
             </div>
             <!-- Backdrop and Modal -->
-            <div class="backdrop">
-              <div class="modal">
-                <div class="modal__title">Formu doldur</div>
-                <div class="modal__form">
-                  <div class="modal__form-inputs flex flex-direct-col">
-                    <label class="modal__form-input">
-                      <input
-                        type="text"
-                        name="name"
-                        id=""
-                        placeholder="Əlaqəli şəxs"
-                      />
-                      <span class="error-message"></span>
-                    </label>
-                    <label class="modal__form-input">
-                      <input type="tel" name="tel" id="" placeholder="Nömrə" />
-                      <span class="error-message"></span>
-                    </label>
-                    <label class="modal__form-input">
-                      <input
-                        type="email"
-                        name="email"
-                        id=""
-                        placeholder="Email"
-                        required
-                      />
-                      <span class="error-message"></span>
-                    </label>
-                  </div>
-                  <button class="modal__form-btn flex-center">Göndər</button>
-                  <button type="button" class="modal__close">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                    >
-                      <path
-                        d="M1.6 16L0 14.4L6.4 8L0 1.6L1.6 0L8 6.4L14.4 0L16 1.6L9.6 8L16 14.4L14.4 16L8 9.6L1.6 16Z"
-                        fill="white"
-                      />
-                    </svg>
-                  </button>
-                </div>
-                <div class="spinner"></div>
-                <div class="modal__success flex-direct-col">
-                  <i class="fa-solid fa-circle-check"></i>
-                  Uğurla göndərildi. Tezliklə əlaqə saxlanılacaq
-                </div>
-              </div>
-            </div>
+           <div class="backdrop">
+            <div class="modal">
+             <div class="modal__title">Formu doldur</div>
+             <div class="modal__form">
+               <div class="modal__form-inputs flex flex-direct-col">
+                <label class="modal__form-input">
+                  <input
+                    type="text"
+                    name="name"
+                    id=""
+                    placeholder="Əlaqəli şəxs"
+                  />
+                  <span class="error-message"></span>
+                 </label>
+                 <label class="modal__form-input">
+                  <input type="number" name="phone" id="" placeholder="Nömrə" />
+                  <span class="error-message"></span>
+                 </label>
+                 <label class="modal__form-input">
+                  <input type="email" name="email" id="" placeholder="Email" required />
+                  <span class="error-message"></span>
+                </label>
+               </div>
+                <button class="modal__form-btn flex-center">Göndər</button>
+                <button type="button" class="modal__close">
+                 <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  >
+                   <path
+                    d="M1.6 16L0 14.4L6.4 8L0 1.6L1.6 0L8 6.4L14.4 0L16 1.6L9.6 8L16 14.4L14.4 16L8 9.6L1.6 16Z"
+                    fill="white"
+                    />
+                  </svg>
+                </button>
+               </div>
+               <div class="spinner"></div>
+               <div class="modal__success flex-direct-col">
+                 <i class="fa-solid fa-circle-check"></i>
+                 Uğurla göndərildi. Tezliklə əlaqə saxlanılacaq
+               </div>
+             </div>
+           </div>
           </form>
         </div>
+
       </section>
-    </main>
+  </main>
 
     <footer class="footer">
       <div class="copyrights">

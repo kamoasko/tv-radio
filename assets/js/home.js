@@ -64,31 +64,198 @@ function getFormValues() {
   return formValues;
 }
 
+// custom currency select option
+
+$(document).ready(function () {
+  // Cache the number of options
+  var $this = $("#currency"),
+    numberOfOptions = $this.children("option").length;
+
+  let allOptions = $this.children("option");
+  let dataUrls = []; // To store the URLs
+
+  allOptions.each(function () {
+    let url = $(this).data("url");
+    dataUrls.push(url);
+  });
+
+  // Hides the select element
+  $this.addClass("s-hidden");
+
+  // Wrap the select element in a div
+  $this.wrap('<div class="select"></div>');
+
+  // Insert a styled div to sit over the top of the hidden select element
+  $this.after('<div class="styledSelect select_currency"></div>');
+
+  // Cache the styled div
+  var $styledSelect = $this.next("div.styledSelect");
+
+  // Function to set the styled select text based on the select element value
+  function setStyledSelectText() {
+    let selectedOption = $this.children("option:selected").text();
+    $styledSelect.text(selectedOption);
+  }
+
+  // Set the initial styled select text
+  setStyledSelectText();
+
+  // Insert an unordered list after the styled div and also cache the list
+  var $list = $("<ul />", {
+    class: "options currency_opt",
+  }).insertAfter($styledSelect);
+
+  // Insert a list item into the unordered list for each select option
+  for (var i = 0; i < numberOfOptions; i++) {
+    $("<li />", {
+      text: $this.children("option").eq(i).text(),
+      rel: $this.children("option").eq(i).val(),
+      "data-url": dataUrls[i], // Add the data-url attribute here
+    }).appendTo($list);
+  }
+
+  // Cache the list items
+  var $listItems = $list.children("li");
+
+  // Show the unordered list when the styled div is clicked (also hides it if the div is clicked again)
+  $styledSelect.click(function (e) {
+    e.stopPropagation();
+    if ($styledSelect.hasClass("active")) {
+      $styledSelect.removeClass("active").next("ul.options").hide();
+    } else {
+      $("div.styledSelect.active").each(function () {
+        $(this).removeClass("active").next("ul.options").hide();
+      });
+      $(this).addClass("active").next("ul.options").show();
+    }
+  });
+
+  // Hides the unordered list when a list item is clicked and updates the styled div to show the selected list item
+  // Updates the select element to have the value of the equivalent option
+  $listItems.click(function (e) {
+    e.stopPropagation();
+    var selectedText = $(this).text();
+    $styledSelect.text(selectedText).removeClass("active");
+    $this.val($(this).attr("rel"));
+    $list.hide();
+
+    // Saving the selected value to localStorage
+    localStorage.setItem("selectedCurrency", $this.val());
+
+    var selectedUrl = $(this).data("url");
+    if (selectedUrl) {
+      window.location.href = selectedUrl;
+    }
+  });
+
+  // Hides the unordered list when clicking outside of it
+  $(document).click(function () {
+    $styledSelect.removeClass("active");
+    $list.hide();
+  });
+
+  // On page load, check localStorage for a saved value
+  var savedCurrency = localStorage.getItem("selectedCurrency");
+  if (savedCurrency) {
+    $this.val(savedCurrency);
+    setStyledSelectText();
+  }
+});
+
 // Function to validate form inputs
 function validateForm() {
   let isValid = true;
-  const inputs = document.querySelectorAll('.form_data input[type="text"]');
+  const inputs = document.querySelectorAll(
+    '.form_data input[type="text"], .form_data input[type="date"], .form_data input[type="number"]'
+  );
   inputs.forEach((input) => {
     const errorSpan = input.parentElement?.querySelector(".error-message");
     if (input.parentElement.classList.contains("response__form-field")) {
       if (!input.value && input.type !== "checkbox") {
         isValid = false;
-        switch (htmlLang) {
-          case "az":
-            errorSpan.textContent = "Zəhmət olmazsa inputu doldurun!";
+        switch (input.name) {
+          case "company":
+            switch (htmlLang) {
+              case "az":
+                errorSpan.textContent = "Şirkətin adını qeyd edin!";
+                break;
+              case "en":
+                errorSpan.textContent = "Please fill the company name!";
+                break;
+              case "ru":
+                errorSpan.textContent =
+                  "Пожалуйста, заполните название компании!";
+                break;
+              default:
+                errorSpan.textContent = "Please fill the company name!";
+                break;
+            }
             break;
-
-          case "en":
-            errorSpan.textContent = "Please fill input!";
-
+          case "product":
+            switch (htmlLang) {
+              case "az":
+                errorSpan.textContent = "Məhsulun adını qeyd edin!";
+                break;
+              case "en":
+                errorSpan.textContent = "Please fill the product name!";
+                break;
+              case "ru":
+                errorSpan.textContent =
+                  "Пожалуйста, заполните название продукта!";
+                break;
+              default:
+                errorSpan.textContent = "Please fill the product name!";
+                break;
+            }
             break;
-
-          case "ru":
-            errorSpan.textContent = "Пожалуйста, заполните данные!";
-
+          case "beginningPeriod":
+          case "endingPeriod":
+            switch (htmlLang) {
+              case "az":
+                errorSpan.textContent = "Reklam müddətini qeyd edin!";
+                break;
+              case "en":
+                errorSpan.textContent = "Please fill the advertisement period!";
+                break;
+              case "ru":
+                errorSpan.textContent = "Пожалуйста, заполните период рекламы!";
+                break;
+              default:
+                errorSpan.textContent = "Please fill the advertisement period!";
+                break;
+            }
+            break;
+          case "budget":
+            switch (htmlLang) {
+              case "az":
+                errorSpan.textContent = "Büdcəni qeyd edin!";
+                break;
+              case "en":
+                errorSpan.textContent = "Please fill the budget!";
+                break;
+              case "ru":
+                errorSpan.textContent = "Пожалуйста, заполните бюджет!";
+                break;
+              default:
+                errorSpan.textContent = "Please fill the budget!";
+                break;
+            }
             break;
           default:
-            errorSpan.textContent = "Please fill input!";
+            switch (htmlLang) {
+              case "az":
+                errorSpan.textContent = "Zəhmət olmazsa inputu doldurun!";
+                break;
+              case "en":
+                errorSpan.textContent = "Please fill input!";
+                break;
+              case "ru":
+                errorSpan.textContent = "Пожалуйста, заполните данные!";
+                break;
+              default:
+                errorSpan.textContent = "Please fill input!";
+                break;
+            }
             break;
         }
         errorSpan.style.display = "inline";
@@ -98,16 +265,57 @@ function validateForm() {
     }
   });
 
-  const checkboxGroups = document.querySelectorAll(
-    ".response__form-field.rff, .response__form-field.rfo"
+  const dropdownGroups = document.querySelectorAll(".response__form-field.rff");
+  dropdownGroups.forEach((group) => {
+    if (!group.querySelector('input[type="checkbox"]')) {
+      const selectedOption =
+        group.querySelector(".selected > span")?.textContent;
+      const errorSpan =
+        group.querySelector(".error-message") || document.createElement("span");
+      errorSpan.className = "error-message";
+
+      if (selectedOption == "Reklamın növü" || selectedOption == "Ad type") {
+        isValid = false;
+        switch (htmlLang) {
+          case "az":
+            errorSpan.textContent = "Reklam növünü seçin!";
+            break;
+          case "en":
+            errorSpan.textContent = "Please select the advertisement type!";
+            break;
+          case "ru":
+            errorSpan.textContent = "Пожалуйста, выберите тип рекламы!";
+            break;
+          default:
+            errorSpan.textContent = "Please select the advertisement type!";
+            break;
+        }
+        if (!group.contains(errorSpan)) {
+          group.appendChild(errorSpan);
+        }
+        errorSpan.style.display = "inline";
+      } else {
+        errorSpan.style.display = "none";
+      }
+    }
+  });
+
+  const timingGroups = document.querySelectorAll(
+    ".response__form-field.rff:nth-of-type(5)"
   );
-  checkboxGroups.forEach((group) => {
+  timingGroups.forEach((group) => {
     const checkboxes = group.querySelectorAll('.rfot input[type="checkbox"]');
     const otherTimingInput = group.querySelector('.rfo1 input[type="number"]');
     const errorSpan = group.querySelector(".error-message");
 
     const isOtherTimingFilled =
       otherTimingInput && otherTimingInput.value.trim() !== "";
+
+    console.log(
+      checkboxes.length > 0 &&
+        !Array.from(checkboxes).some((checkbox) => checkbox.checked) &&
+        !isOtherTimingFilled
+    );
 
     if (
       checkboxes.length > 0 &&
@@ -123,67 +331,22 @@ function validateForm() {
       } else {
         switch (htmlLang) {
           case "az":
-            errorSpan.textContent = "Zəhmət olmazsa, ən azı bir variant seçin!";
+            errorSpan.textContent = "Xronometrajı qeyd edin!";
             break;
-
           case "en":
-            errorSpan.textContent = "Please select at least one option!";
-
+            errorSpan.textContent = "Please fill the timing!";
             break;
-
           case "ru":
-            errorSpan.textContent =
-              "Пожалуйста, выберите хотя бы один вариант!";
-
+            errorSpan.textContent = "Пожалуйста, заполните хронометраж!";
             break;
           default:
-            errorSpan.textContent = "Please select at least one option!";
+            errorSpan.textContent = "Please fill the timing!";
             break;
         }
         errorSpan.style.display = "inline";
       }
     } else if (errorSpan) {
       errorSpan.style.display = "none";
-    }
-  });
-
-  const dropdownGroups = document.querySelectorAll(".response__form-field.rff");
-  dropdownGroups.forEach((group) => {
-    if (!group.querySelector('input[type="checkbox"]')) {
-      const selectedOption =
-        group.querySelector(".selected > span")?.textContent;
-      const errorSpan =
-        group.querySelector(".error-message") || document.createElement("span");
-      errorSpan.className = "error-message";
-
-      if (selectedOption == "Reklamın tipi" || selectedOption == "Ad type") {
-        isValid = false;
-        switch (htmlLang) {
-          case "az":
-            errorSpan.textContent = "Zəhmət olmazsa, ən azı bir variant seçin!";
-            break;
-
-          case "en":
-            errorSpan.textContent = "Please select at least one option!";
-
-            break;
-
-          case "ru":
-            errorSpan.textContent =
-              "Пожалуйста, выберите хотя бы один вариант!";
-
-            break;
-          default:
-            errorSpan.textContent = "Please select at least one option!";
-            break;
-        }
-        if (!group.contains(errorSpan)) {
-          group.appendChild(errorSpan);
-        }
-        errorSpan.style.display = "inline";
-      } else {
-        errorSpan.style.display = "none";
-      }
     }
   });
 
@@ -201,6 +364,9 @@ formBtn.addEventListener("click", (e) => {
 
 const modalSendBtn = document.querySelector(".modal__form-btn");
 const modal = document.querySelector(".modal");
+
+// Regular expression for email validation
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function getFormModalValues() {
   const modalInputs = document.querySelectorAll(".modal__form-input > input");
@@ -227,6 +393,26 @@ function getFormModalValues() {
           break;
       }
       errorSpan.style.display = "inline";
+    } else if (input.type === "email" && !emailRegex.test(input.value)) {
+      // Check if the email format is valid
+      isFormValid = false;
+      switch (htmlLang) {
+        case "az":
+          errorSpan.textContent = "Zəhmət olmazsa düzgün email daxil edin!";
+          break;
+
+        case "en":
+          errorSpan.textContent = "Please enter a valid email address!";
+          break;
+
+        case "ru":
+          errorSpan.textContent = "Пожалуйста, введите корректный email!";
+          break;
+        default:
+          errorSpan.textContent = "Please enter a valid email address!";
+          break;
+      }
+      errorSpan.style.display = "inline";
     } else {
       errorSpan.style.display = "none";
     }
@@ -237,7 +423,7 @@ function getFormModalValues() {
       ".modal__form-input > input[name='name']"
     ).value;
     const phone = document.querySelector(
-      ".modal__form-input > input[name='tel']"
+      ".modal__form-input > input[name='phone']"
     ).value;
     const email = document.querySelector(
       ".modal__form-input > input[name='email']"
@@ -333,7 +519,9 @@ const selectedOptionText = document.querySelectorAll(".selected > span");
 
 options.forEach((option, index) => {
   option.addEventListener("click", (e) => {
-    e.stopPropagation();
+    if (e.target.parentElement.id !== "adTypeOptions") {
+      e.stopPropagation();
+    }
     if (e.target.classList.contains("flex-center")) {
       const optionText = e.target.textContent.trim();
       selectedOptionText[index].textContent = optionText;
@@ -342,7 +530,7 @@ options.forEach((option, index) => {
 });
 
 function updateSelectedOptions(field) {
-  const selectedSpan = field.querySelector(".selected > span");
+  const selectedSpan = field.querySelector(".selected > span:nth-child(2)");
   const selectedInput = field.querySelector(
     ".selected > input.selected_options"
   );
@@ -356,79 +544,119 @@ function updateSelectedOptions(field) {
     .closest(".form_data")
     ?.querySelector(".rff:nth-of-type(2) .selected > span");
 
-  // if (adTypeSpan) {
-  //     localStorage.setItem("default", adTypeSpan.textContent);
-  // }
-
   if (field.querySelector("#timing")) {
     const otherTimingInput = field.querySelector('.rfo1 input[type="number"]');
     if (otherTimingInput && otherTimingInput.value.trim() !== "") {
-      selectedValues.push(otherTimingInput.value);
+      switch (htmlLang) {
+        case "az":
+          selectedValues.push(otherTimingInput.value + " saniyə");
+          break;
+        case "en":
+          selectedValues.push(otherTimingInput.value + " second");
+          break;
+        case "ru":
+          selectedValues.push(otherTimingInput.value + " секунды");
+          break;
+      }
     }
-  }
 
-  if (selectedValues.length > 0) {
-    if (selectedInput) {
-      selectedInput.value = selectedValues.join(", ");
-      selectedInput.style.display = "block";
-    }
-    if (selectedSpan) {
-      selectedSpan.style.display = "none";
+    // Check if selectedValues is not empty and contains expected patterns
+    if (selectedValues.length > 0) {
+      const numericParts = selectedValues
+        .map((value) => value.match(/\d+/))
+        .filter((part) => part !== null);
+      if (numericParts.length > 0) {
+        const joinedNumericParts = numericParts
+          .map((part) => part[0])
+          .join("-");
+        const unitMatch = selectedValues[0].match(/[a-zA-Zə]+$/);
+        if (unitMatch) {
+          const unit = unitMatch[0];
+          const joinedTiming = joinedNumericParts + " " + unit;
+
+          if (selectedInput) {
+            selectedInput.value = joinedTiming;
+            selectedInput.style.display = "block";
+          }
+          if (selectedSpan) {
+            selectedSpan.style.display = "none";
+          }
+        }
+      }
+    } else {
+      // No checkboxes are checked, reset the display styles
+      if (selectedInput) {
+        selectedInput.value = "";
+        selectedInput.style.display = "none";
+      }
+      if (selectedSpan) {
+        selectedSpan.style.display = "block";
+      }
     }
   } else {
-    if (selectedInput) {
-      selectedInput.value = "";
-      selectedInput.style.display = "none";
-    }
-    if (selectedSpan) {
-      selectedSpan.style.display = "block";
-      if (adTypeSpan) {
-        if (field.querySelector("#channels")) {
-          if (adTypeSpan.textContent === "Radio (spot)") {
+    if (selectedValues.length > 0) {
+      if (selectedInput) {
+        selectedInput.value = selectedValues.join(", ");
+        selectedInput.style.display = "block";
+      }
+      if (selectedSpan) {
+        selectedSpan.style.display = "none";
+      }
+    } else {
+      if (selectedInput) {
+        selectedInput.value = "";
+        selectedInput.style.display = "none";
+      }
+      if (selectedSpan) {
+        selectedSpan.style.display = "block";
+        if (adTypeSpan) {
+          if (field.querySelector("#channels")) {
+            if (adTypeSpan.textContent === "Radio (spot)") {
+              switch (htmlLang) {
+                case "az":
+                  selectedSpan.textContent = "Dalğa";
+                  break;
+                case "ru":
+                  selectedSpan.textContent = "Волна";
+                  break;
+                case "en":
+                  selectedSpan.textContent = "Wave";
+                  break;
+                default:
+                  selectedSpan.textContent = "Dalğa";
+                  break;
+              }
+            } else {
+              switch (htmlLang) {
+                case "az":
+                  selectedSpan.textContent = "Kanal";
+                  break;
+                case "ru":
+                  selectedSpan.textContent = "Канал";
+                  break;
+                case "en":
+                  selectedSpan.textContent = "Channel";
+                  break;
+                default:
+                  selectedSpan.textContent = "Kanal";
+                  break;
+              }
+            }
+          } else if (field.querySelector("#timing")) {
             switch (htmlLang) {
               case "az":
-                selectedSpan.textContent = "Dalğa";
+                selectedSpan.textContent = "Xronometraj";
                 break;
               case "ru":
-                selectedSpan.textContent = "Волна";
+                selectedSpan.textContent = "Хронометрай";
                 break;
               case "en":
-                selectedSpan.textContent = "Wave";
+                selectedSpan.textContent = "Timing";
                 break;
               default:
-                selectedSpan.textContent = "Dalğa";
+                selectedSpan.textContent = "Xronometraj";
                 break;
             }
-          } else {
-            switch (htmlLang) {
-              case "az":
-                selectedSpan.textContent = "Kanal";
-                break;
-              case "ru":
-                selectedSpan.textContent = "Канал";
-                break;
-              case "en":
-                selectedSpan.textContent = "Channel";
-                break;
-              default:
-                selectedSpan.textContent = "Kanal";
-                break;
-            }
-          }
-        } else if (field.querySelector("#timing")) {
-          switch (htmlLang) {
-            case "az":
-              selectedSpan.textContent = "Xronometraj";
-              break;
-            case "ru":
-              selectedSpan.textContent = "Хронометрай";
-              break;
-            case "en":
-              selectedSpan.textContent = "Timing";
-              break;
-            default:
-              selectedSpan.textContent = "Xronometraj";
-              break;
           }
         }
       }
@@ -583,14 +811,19 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target.classList.contains("flex-center")) {
       let adsTypeId = e.target.getAttribute("data-id");
       let adsTypeName = e.target.textContent.trim();
-      e.stopPropagation();
+
+      if (e.target.parentElement.id !== "adTypeOptions") {
+        e.stopPropagation();
+      }
 
       e.currentTarget
         .closest(".rff")
         .querySelector(".selected > span").textContent = adsTypeName;
 
       const channelsField = channels.closest(".rff");
-      const channelSpan = channelsField.querySelector(".selected > span");
+      const channelSpan = channelsField.querySelector(
+        ".selected > span:nth-child(2)"
+      );
       const formId = channelsField.closest(".form_data").id;
       const key = `initialChannelText_${formId}`;
 
@@ -660,13 +893,26 @@ document.addEventListener("DOMContentLoaded", () => {
     dateInputs.forEach((inp, index) => {
       const config = {
         enableTime: false,
-        dateFormat: "d/m/Y",
-        // locale: htmlLang,
-        // mode: "range",
+        dateFormat: "d.m.y",
+        locale: {
+          firstDayOfWeek: 1,
+        },
         minDate: "today",
         disableMobile: "true",
         onChange: function (selectedDates, dateStr, instance) {
           inp.style.fontSize = "1.33rem";
+
+          if (index === 0) {
+            const endDateInput = dateInputs[1];
+            if (endDateInput && endDateInput._flatpickr) {
+              endDateInput._flatpickr.set(
+                "minDate",
+                selectedDates[0]
+                  ? new Date(selectedDates[0].getTime() + 24 * 60 * 60 * 1000)
+                  : "today"
+              );
+            }
+          }
         },
         onOpen: function () {
           responseSelects.forEach((select) => {
@@ -736,46 +982,53 @@ document.addEventListener("DOMContentLoaded", () => {
                 <path d="M1.6 16L0 14.4L6.4 8L0 1.6L1.6 0L8 6.4L14.4 0L16 1.6L9.6 8L16 14.4L14.4 16L8 9.6L1.6 16Z" fill="#5B5757"/>
             </svg>
         </button>
-        <div class="form_data rff_new" data-form-index="${formValues.length}" id="${formId}">
+        <div class="form_data rff_new" data-form-index="${
+          formValues.length
+        }" id="${formId}">
             <div class="response__form-field input_title">
-                <input data-title="Şirkıtin adı ümumi" type="text" name="company" placeholder="${company}" />
+                <input data-title="Şirkıtin adı ümumi" type="text" name="company" placeholder="${company}" tabindex="${
+      formIdCounter * 10 + 1
+    }" />
                 <span></span>
                 <span class="error-message"></span>
             </div>
             <div class="response__form-field input_title">
-                <input type="text" name="product" placeholder="${product}" />
+                <input type="text" name="product" placeholder="${product}" tabindex="${
+      formIdCounter * 10 + 2
+    }"/>
                 <span></span>
                 <span class="error-message"></span>
             </div>
-            <div class="response__form-field rff">
+            <div class="response__form-field rff" tabindex="${
+              formIdCounter * 10 + 3
+            }">
                 <span class="error-message"></span>
                 <div class="selected flex-center" value="${ad_type}">
                     <span>${ad_type}</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-                        <path d="M1.5 1L6.9176 8.88014C6.95733 8.93794 7.04267 8.93794 7.0824 8.88014L12.5 1" stroke="#5D5858" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
+                    <i class="fa-solid fa-chevron-down"></i>
                 </div>
                 <div><div class="response__form-options flex flex-direct-col" id="adTypeOptions"></div></div>
             </div>
-            <div class="response__form-field rff">
+            <div class="response__form-field rff" tabindex="${
+              formIdCounter * 10 + 4
+            }">
                 <span class="error-message"></span>
-                <div class="selected flex-center" value="${channels}">
+                <div class="selected input_title flex-center" value="${channels}">
+                    <span></span>
                     <span>${channels}</span>
                     <input type="text" class="selected_options" value="" readonly="readonly">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-                        <path d="M1.5 1L6.9176 8.88014C6.95733 8.93794 7.04267 8.93794 7.0824 8.88014L12.5 1" stroke="#5D5858" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
+                    <i class="fa-solid fa-chevron-down"></i>
                 </div>
                 <div><div class="response__form-options flex flex-direct-col rfo " id="channels"></div></div>
             </div>
-            <div class="response__form-field rff">
+            <div class="response__form-field rff" tabindex="${
+              formIdCounter * 10 + 5
+            }">
                 <span class="error-message"></span>
                 <div class="selected flex-center">
-                    <span>${timing}</span>
                     <input type="text" class="selected_options" value="" readonly="readonly">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-                        <path d="M1.5 1L6.9176 8.88014C6.95733 8.93794 7.04267 8.93794 7.0824 8.88014L12.5 1" stroke="#5D5858" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
+                    <span>${timing}</span>
+                    <i class="fa-solid fa-chevron-down"></i>
                 </div>
                 <div>
                     <div class="response__form-options rfo flex flex-direct-col rfot" id="timing">
@@ -789,20 +1042,24 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                 </div>
             </div>
-            <div class="response__form-field flex-center">
-                <input type="date" name="beginningPeriod" id="myInp" placeholder="${period}" value="" />
-                <input type="date" name="endingPeriod" id="myInp" placeholder="${period}" value="" />
+            <div class="response__form-field rff_date flex-center">
+                <input type="date" name="beginningPeriod" id="myInp" placeholder="${period}" value="" tabindex="${
+      formIdCounter * 10 + 6
+    }" />
+                <input type="date" name="endingPeriod" id="myInp" placeholder="${period}" value="" tabindex="${
+      formIdCounter * 10 + 7
+    }"/>
                 <span class="error-message"></span>
             </div>
-            <div class="response__form-field budget_inp">
-                <div class="flex align-items-center">
-                    <input type="number" name="budget" placeholder="${badge}" />
-                    <select name="currency" id="">
+            <div class="response__form-field budget_inp flex align-items-center">
+                    <input type="number" name="budget" placeholder="${badge}" tabindex="${
+      formIdCounter * 10 + 8
+    }"/>
+                    <select name="currency" id="currency">
                         <option value="AZN">AZN</option>
                         <option value="USD">USD</option>
                         <option value="EUR">EUR</option>
                     </select>
-                </div>
                 <span class="error-message"></span>
             </div>
         </div>
@@ -820,6 +1077,87 @@ document.addEventListener("DOMContentLoaded", () => {
     attachEventListeners(newFormElement);
 
     getFlatCalendar(selectedDates);
+
+    const newCurrencySelect = newFormElement.querySelector("#currency");
+    customCurrencySelect(newCurrencySelect);
+  }
+
+  function customCurrencySelect(select) {
+    var $this = $(select),
+      numberOfOptions = $this.children("option").length;
+
+    let allOptions = $this.children("option");
+    let dataUrls = [];
+
+    allOptions.each(function () {
+      let url = $(this).data("url");
+      dataUrls.push(url);
+    });
+
+    $this.addClass("s-hidden");
+    $this.wrap('<div class="select"></div>');
+
+    $this.after('<div class="styledSelect select_currency"></div>');
+    var $styledSelect = $this.next("div.styledSelect");
+
+    function setStyledSelectText() {
+      let selectedOption = $this.children("option:selected").text();
+      $styledSelect.text(selectedOption);
+    }
+
+    setStyledSelectText();
+
+    var $list = $("<ul />", {
+      class: "options currency_opt",
+    }).insertAfter($styledSelect);
+
+    for (var i = 0; i < numberOfOptions; i++) {
+      $("<li />", {
+        text: $this.children("option").eq(i).text(),
+        rel: $this.children("option").eq(i).val(),
+        "data-url": dataUrls[i], // Add the data-url attribute here
+      }).appendTo($list);
+    }
+
+    var $listItems = $list.children("li");
+
+    $styledSelect.click(function (e) {
+      e.stopPropagation();
+      if ($styledSelect.hasClass("active")) {
+        $styledSelect.removeClass("active").next("ul.options").hide();
+      } else {
+        $("div.styledSelect.active").each(function () {
+          $(this).removeClass("active").next("ul.options").hide();
+        });
+        $(this).addClass("active").next("ul.options").show();
+      }
+    });
+
+    $listItems.click(function (e) {
+      e.stopPropagation();
+      var selectedText = $(this).text();
+      $styledSelect.text(selectedText).removeClass("active");
+      $this.val($(this).attr("rel"));
+      $list.hide();
+
+      localStorage.setItem("selectedCurrency", $this.val());
+
+      var selectedUrl = $(this).data("url");
+      if (selectedUrl) {
+        window.location.href = selectedUrl;
+      }
+    });
+
+    $(document).click(function () {
+      $styledSelect.removeClass("active");
+      $list.hide();
+    });
+
+    var savedCurrency = localStorage.getItem("selectedCurrency");
+    if (savedCurrency) {
+      $this.val(savedCurrency);
+      setStyledSelectText();
+    }
   }
 
   function attachEventListeners(newFormElement) {
@@ -871,14 +1209,19 @@ document.addEventListener("DOMContentLoaded", () => {
       if (e.target.classList.contains("flex-center")) {
         let adsTypeId = e.target.getAttribute("data-id");
         let adsTypeName = e.target.textContent.trim();
-        e.stopPropagation();
+
+        if (e.target.parentElement.id !== "adTypeOptions") {
+          e.stopPropagation();
+        }
 
         e.currentTarget
           .closest(".rff")
           .querySelector(".selected > span").textContent = adsTypeName;
 
         const channelsField = newChannels.closest(".rff");
-        const channelSpan = channelsField.querySelector(".selected > span");
+        const channelSpan = channelsField.querySelector(
+          ".selected > span:nth-child(2)"
+        );
         const formId = channelsField.closest(".form_data").id;
         const key = `initialChannelText_${formId}`;
 
@@ -898,12 +1241,10 @@ document.addEventListener("DOMContentLoaded", () => {
               break;
           }
         } else {
-          // Retrieve the initial text from localStorage
           const initialText = localStorage.getItem(key);
           if (initialText) {
             channelSpan.textContent = initialText;
           } else {
-            // Fallback to default values if localStorage is empty
             switch (htmlLang) {
               case "az":
                 channelSpan.textContent = "Kanal";
@@ -933,7 +1274,9 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     newResponseSelects.forEach((select) => {
       select.addEventListener("click", (e) => {
-        e.stopPropagation();
+        if (e.target.parentElement.id !== "adTypeOptions") {
+          e.stopPropagation();
+        }
         if (!e.target.matches("input")) {
           closeOtherFormFields(select);
           select.classList.toggle("active");
@@ -944,7 +1287,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const selectedOptionText = select.querySelector(".selected > span");
 
       options.addEventListener("click", (e) => {
-        e.stopPropagation();
+        if (e.target.parentElement.id !== "adTypeOptions") {
+          e.stopPropagation();
+        }
         if (e.target.classList.contains("flex-center")) {
           const optionText = e.target.textContent.trim();
           selectedOptionText.textContent = optionText;
