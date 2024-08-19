@@ -50,7 +50,7 @@ main {
 }
 
 .response__form-field {
-  padding: 1.7rem 0.44rem;
+  padding: 1.7rem 0.3rem;
   border-radius: 3.4rem;
   border: 0.5px solid var(--color-darker);
   width: 100%;
@@ -505,12 +505,12 @@ div.backdrop {
   }
 
   .response__form-field {
-    padding: 1rem;
+    padding: 0.8rem;
   }
 
   .selected {
-    -moz-column-gap: 0.4rem;
-    column-gap: 0.4rem;
+    -moz-column-gap: 0.2rem;
+    column-gap: 0.2rem;
   }
 
   .btn {
@@ -520,7 +520,7 @@ div.backdrop {
 
 @media only screen and (max-width: 1201px) {
   .response__form-field {
-    padding: 0.6rem;
+    padding: 0.4rem;
   }
 }
 
@@ -557,19 +557,24 @@ div.backdrop {
 
 @media only screen and (max-width: 1011px) {
   .selected {
-    -moz-column-gap: 0.1rem;
-    column-gap: 0.1rem;
+    -moz-column-gap: 0rem;
+    column-gap: 0rem;
   }
 }
 
-@media only screen and (max-width: 988px) {
+@media only screen and (max-width: 989px) {
   .form > div.form_data {
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
   }
 
   .response__form-field {
     grid-column: span 2;
     padding: 1.1rem 2rem;
+  }
+
+  .selected,
+  .budget_inp > div {
+    justify-content: space-between;
   }
 
   /* .response__form-field>input,
@@ -652,11 +657,6 @@ div.backdrop {
   .response__form-field > input#myInp::placeholder {
     display: flex;
     text-align: center;
-  }
-
-  .selected,
-  .budget_inp > div {
-    justify-content: space-between;
   }
 }
 

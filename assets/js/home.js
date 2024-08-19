@@ -301,7 +301,7 @@ function validateForm() {
   });
 
   const timingGroups = document.querySelectorAll(
-    ".response__form-field.rff:nth-of-type(5)"
+    ".response__form-field.rff_timing"
   );
   timingGroups.forEach((group) => {
     const checkboxes = group.querySelectorAll('.rfot input[type="checkbox"]');
@@ -310,12 +310,6 @@ function validateForm() {
 
     const isOtherTimingFilled =
       otherTimingInput && otherTimingInput.value.trim() !== "";
-
-    console.log(
-      checkboxes.length > 0 &&
-        !Array.from(checkboxes).some((checkbox) => checkbox.checked) &&
-        !isOtherTimingFilled
-    );
 
     if (
       checkboxes.length > 0 &&
@@ -394,7 +388,6 @@ function getFormModalValues() {
       }
       errorSpan.style.display = "inline";
     } else if (input.type === "email" && !emailRegex.test(input.value)) {
-      // Check if the email format is valid
       isFormValid = false;
       switch (htmlLang) {
         case "az":
@@ -872,25 +865,39 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function getSelectedDates() {
+    const dateInputPairs = [];
     const dateInputs = document.querySelectorAll('input[id="myInp"]');
-    const selectedDates = [];
 
-    dateInputs.forEach((input) => {
-      const flatpickrInstance = input._flatpickr;
-      if (flatpickrInstance) {
-        selectedDates.push(flatpickrInstance.selectedDates);
-      } else {
-        selectedDates.push([]);
-      }
-    });
+    for (let i = 0; i < dateInputs.length; i += 2) {
+      const beginningInput = dateInputs[i];
+      const endingInput = dateInputs[i + 1];
 
-    return selectedDates;
+      const beginningDate = beginningInput._flatpickr
+        ? beginningInput._flatpickr.selectedDates[0]
+        : null;
+      const endingDate = endingInput._flatpickr
+        ? endingInput._flatpickr.selectedDates[0]
+        : null;
+
+      dateInputPairs.push([beginningDate, endingDate]);
+    }
+
+    return dateInputPairs;
   }
 
   function getFlatCalendar(selectedDates = []) {
     const dateInputs = document.querySelectorAll('input[id="myInp"]');
+    const dateInputPairs = [];
 
-    dateInputs.forEach((inp, index) => {
+    // Pair beginning and ending date inputs
+    for (let i = 0; i < dateInputs.length; i += 2) {
+      dateInputPairs.push({
+        beginning: dateInputs[i],
+        ending: dateInputs[i + 1],
+      });
+    }
+
+    dateInputPairs.forEach((pair, index) => {
       const config = {
         enableTime: false,
         dateFormat: "d.m.y",
@@ -900,18 +907,15 @@ document.addEventListener("DOMContentLoaded", () => {
         minDate: "today",
         disableMobile: "true",
         onChange: function (selectedDates, dateStr, instance) {
-          inp.style.fontSize = "1.33rem";
+          pair.beginning.style.fontSize = "1.33rem";
 
-          if (index === 0) {
-            const endDateInput = dateInputs[1];
-            if (endDateInput && endDateInput._flatpickr) {
-              endDateInput._flatpickr.set(
-                "minDate",
-                selectedDates[0]
-                  ? new Date(selectedDates[0].getTime() + 24 * 60 * 60 * 1000)
-                  : "today"
-              );
-            }
+          if (pair.ending._flatpickr) {
+            pair.ending._flatpickr.set(
+              "minDate",
+              selectedDates[0]
+                ? new Date(selectedDates[0].getTime() + 24 * 60 * 60 * 1000)
+                : "today"
+            );
           }
         },
         onOpen: function () {
@@ -926,10 +930,43 @@ document.addEventListener("DOMContentLoaded", () => {
         },
       };
 
-      flatpickr(inp, config);
+      flatpickr(pair.beginning, config);
+      flatpickr(pair.ending, {
+        enableTime: false,
+        dateFormat: "d.m.y",
+        locale: {
+          firstDayOfWeek: 1,
+        },
+        minDate: pair.beginning._flatpickr.selectedDates[0]
+          ? new Date(
+              pair.beginning._flatpickr.selectedDates[0].getTime() +
+                24 * 60 * 60 * 1000
+            )
+          : "today",
+        disableMobile: "true",
+        onChange: function () {
+          pair.ending.style.fontSize = "1.33rem";
+        },
+        onOpen: function () {
+          responseSelects.forEach((select) => {
+            if (select.classList.contains("active")) {
+              select.classList.remove("active");
+            }
+          });
+        },
+        onClose: function () {
+          // ...
+        },
+      });
 
       if (selectedDates[index] && selectedDates[index].length > 0) {
-        inp._flatpickr.setDate(selectedDates[index], true);
+        // Set beginning date
+        pair.beginning._flatpickr.setDate(selectedDates[index][0], true);
+
+        // Set ending date if it exists
+        if (selectedDates[index].length > 1) {
+          pair.ending._flatpickr.setDate(selectedDates[index][1], true);
+        }
       }
     });
   }
@@ -1021,7 +1058,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
                 <div><div class="response__form-options flex flex-direct-col rfo " id="channels"></div></div>
             </div>
-            <div class="response__form-field rff" tabindex="${
+            <div class="response__form-field rff rff_timing" tabindex="${
               formIdCounter * 10 + 5
             }">
                 <span class="error-message"></span>
@@ -1115,7 +1152,7 @@ document.addEventListener("DOMContentLoaded", () => {
       $("<li />", {
         text: $this.children("option").eq(i).text(),
         rel: $this.children("option").eq(i).val(),
-        "data-url": dataUrls[i], // Add the data-url attribute here
+        "data-url": dataUrls[i],
       }).appendTo($list);
     }
 

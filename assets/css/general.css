@@ -373,7 +373,7 @@
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 989px) {
   .footer {
     margin-top: 9.3rem;
   }
